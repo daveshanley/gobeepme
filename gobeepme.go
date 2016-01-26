@@ -25,7 +25,6 @@ func main() {
     pf := flag.String("pass", "", "Pretty sure this is self explanatory")
     nf := flag.String("name", "", "Name of the iOS device you want to beep")
     mf := flag.String("msg", "", "Message to be sent to iOS device")
-    bf := flag.Bool("beep", true, "Send Beep?")
     sf := flag.Bool("server", false, "Run as http service")
 
     var un, pw, dn, msg string
@@ -34,7 +33,6 @@ func main() {
     pfVal := *pf
     nfVal := *nf
     mfVal := *mf
-    bfVal := *bf
     sfVal := *sf
 
     // check for service mode
@@ -57,31 +55,21 @@ func main() {
     if nfVal == "" {
         dn = ""    // device name
     } else {
-        pw = strings.TrimSpace(nfVal)
+        dn = strings.TrimSpace(nfVal)
     }
-    if nfVal == "" {
-        dn = ""
+    if mfVal == "" {
+        msg = "gobeepme is beeping you!" // message
     } else {
-        pw = strings.TrimSpace(nfVal)
+        msg = strings.TrimSpace(mfVal)
     }
-
-
 
     // print welcome!
     console.WelcomeBanner()
 
-    /*
-    if nfVal == "" {
-        id = collectId()
-    } else {
-        id = strings.TrimSpace(nfVal)
-    }
-    */
-
-
-    var creds = model.Creds{AppleID: username, Password: password}
+    var cr = model.Creds{AppleID: un, Password: pw}
     var cs model.CloudService
-    cs, err := commands.Authenticate(creds, client)
+
+    cs, err := commands.Authenticate(cr, client)
     if err != nil {
         fmt.Printf("\nAuthentication Failed: %v", err)
         return
@@ -92,10 +80,16 @@ func main() {
         fmt.Printf("\nCan't refresh devices: %v", err)
         return
     }
-    console.PrintDevices(&d)
-    dID := console.CollectDeviceSelection(len(d.Devices))
+
+    var dID int
+    if dn == "" {
+        console.PrintDevices(&d)
+        dID = console.CollectDeviceSelection(len(d.Devices))
+    } else {
+
+    }
     message := console.CollectMessageSelection()
-    play := console.CollectPlaySound()
+
     fd, err := d.GetDeviceByIndex(dID - 1)
     if err != nil {
         fmt.Printf("\nUnable to extract device: %v", err)

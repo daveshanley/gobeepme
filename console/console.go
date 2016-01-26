@@ -43,29 +43,6 @@ func CollectMessageSelection() string {
     return message
 }
 
-func CollectPlaySound() bool {
-    r := bufio.NewReader(os.Stdin)
-    var sound string
-    var b bool = false
-    for sound == "" {
-        fmt.Print("Play Sound? [y/n]: ")
-        s, _ := r.ReadString('\n')
-        sound = strings.ToLower(strings.TrimSpace(s))
-        rc := utf8.RuneCountInString(sound)
-        if rc != 1 || (sound != "y" && sound != "n") {
-            sound = ""
-            continue
-        } else {
-            if sound == "y" {
-                b = true
-            } else {
-                b = false
-            }
-        }
-    }
-    return b
-}
-
 func CollectUsername() string {
     r := bufio.NewReader(os.Stdin)
     var username string

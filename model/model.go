@@ -1,10 +1,8 @@
-// Copyright 2015 The Go Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Copyright 2015 Dave Shanley <dave@quobix.com>
+// Use of this source code is governed by a The MIT License
 // license that can be found in the LICENSE file.
 
-// Package bufio implements buffered I/O.  It wraps an io.Reader or io.Writer
-// object, creating another object (Reader or Writer) that also implements
-// the interface but provides buffering and some help for textual I/O.
+// Package model provides data models for server resonses, devices and JSON mappings.
 package model
 
 import (
@@ -80,7 +78,6 @@ func (d *DeviceResult) GetDeviceByName(name string) (*Device, error) {
     return nil, fmt.Errorf("No Device with name [%s] located", name)
 }
 
-
 func (d *DeviceResult) GetDeviceByDisplayName(dn string) *Device {
     for _, r := range d.Devices {
         if r.DisplayName == dn {
@@ -89,4 +86,3 @@ func (d *DeviceResult) GetDeviceByDisplayName(dn string) *Device {
     }
     return nil
 }
-
