@@ -1,4 +1,4 @@
-package gobeepme
+package main
 
 import (
 	"fmt"
@@ -243,8 +243,10 @@ func printDevices(dr *DeviceResult) {
 }
 
 func playSound (cs *CloudService, d *Device, msg string) bool {
-	sc := ServerCommand{d.ID, msg}
-	o,_ := json.Marshal(sc)
+	//sc := ServerCommand{d.ID, msg}
+	//o,_ := json.Marshal(sc)
+
+	/*
 	req, err := http.NewRequest("POST", "https://"+cs.Host+"/fmipservice/device/" +
 		cs.Scope + "/playSound", bytes.NewReader(o))
 	req.Header.Set("Origin", "https://www.icloud.com")
@@ -255,11 +257,14 @@ func playSound (cs *CloudService, d *Device, msg string) bool {
 		panic(err)
 	}
 	defer resp.Body.Close()
+	*/
 	return true;
 }
 
 func sendMessage (cs *CloudService, d *Device, msg string) bool {
+	/*
 	sc := ServerCommand{d.ID, msg}
+
 	o,_ := json.Marshal(sc)
 	req, err := http.NewRequest("POST", "https://"+cs.Host+"/fmipservice/device/" +
 	cs.Scope + "/sendMessage", bytes.NewReader(o))
@@ -270,23 +275,25 @@ func sendMessage (cs *CloudService, d *Device, msg string) bool {
 	if err != nil {
 		panic(err)
 	}
+
 	defer resp.Body.Close()
+	*/
 	return true;
 }
 
 func main() {
 	uf := flag.String("user", "", "Your iCloud ID / AppleID (normally an email)")
 	pf := flag.String("pass", "", "Pretty sure this is self explanatory")
-	nf := flag.String("name", "", "Name of the iOS device you want to beep")
+	//nf := flag.String("name", "", "Name of the iOS device you want to beep")
 
 	// print welcome!
 	welcomeBanner()
 
-	var username, password, id, msg string
+	var username, password string
 	flag.Parse()
 	ufVal := *uf
 	pfVal := *pf
-	nfVal := *nf
+	//nfVal := *nf
 
 	if ufVal == "" {
 		username=collectUsername()
@@ -298,12 +305,14 @@ func main() {
 	} else {
 		password = strings.TrimSpace(pfVal)
 	}
+
+	/*
 	if nfVal == "" {
 		id = collectId()
 	} else {
 		id = strings.TrimSpace(nfVal)
 	}
-
+	*/
 
 
 	var creds = Creds{AppleID: username ,Password: password}
@@ -330,9 +339,9 @@ func main() {
 	}
 
 	if play {
-		//playSound(&cs, fd, message);
+		playSound(&cs, fd, message);
 	} else {
-		//sendMessage(&cs, fd, message);
+		sendMessage(&cs, fd, message);
 	}
 	fmt.Printf("\nDelivered!\n")
 
