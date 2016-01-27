@@ -2,8 +2,6 @@ package main
 
 import (
     "fmt"
-    "net/http"
-    "net/http/cookiejar"
     "strings"
     "flag"
     "github.com/daveshanley/gobeepme/model"
@@ -11,12 +9,7 @@ import (
     "github.com/daveshanley/gobeepme/commands"
 )
 
-var (
-    client = &http.Client{
-        Jar: cookieJar,
-    }
-    cookieJar, _ = cookiejar.New(nil)
-)
+
 
 func main() {
 
@@ -41,6 +34,10 @@ func main() {
         return
     }
 
+
+    // print welcome!
+    console.WelcomeBanner()
+
     // defaults
     if ufVal == "" {
         un = console.CollectUsername()
@@ -63,19 +60,16 @@ func main() {
         msg = strings.TrimSpace(mfVal)
     }
 
-    // print welcome!
-    console.WelcomeBanner()
-
     var cr = model.Creds{AppleID: un, Password: pw}
     var cs model.CloudService
 
-    cs, err := commands.Authenticate(cr, client)
+    cs, err := commands.Authenticate(cr)
     if err != nil {
         fmt.Printf("\nAuthentication Failed: %v", err)
         return
     }
 
-    d, err := commands.RefreshDeviceList(&cs, client)
+    d, err := commands.RefreshDeviceList(&cs)
     if err != nil {
         fmt.Printf("\nCan't refresh devices: %v", err)
         return
@@ -85,22 +79,17 @@ func main() {
     if dn == "" {
         console.PrintDevices(&d)
         dID = console.CollectDeviceSelection(len(d.Devices))
-    } else {
-
     }
-    message := console.CollectMessageSelection()
+    msg = console.CollectMessageSelection()
 
-    fd, err := d.GetDeviceByIndex(dID - 1)
+    /*
+    _, err == d.GetDeviceByIndex(dID - 1)
     if err != nil {
         fmt.Printf("\nUnable to extract device: %v", err)
         return
     }
+    */
 
-    if play {
-        commands.PlaySound(&cs, fd, message);
-    } else {
-        commands.SendMessage(&cs, fd, message);
-    }
-    fmt.Printf("\nDelivered!\n")
+    fmt.Printf("\nDelivered! %s %d\n", msg, dID)
 
 }

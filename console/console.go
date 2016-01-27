@@ -9,7 +9,6 @@ import (
     "os"
     "bufio"
     "strings"
-    "unicode/utf8"
 )
 
 func PrintDevices(dr *model.DeviceResult) {
