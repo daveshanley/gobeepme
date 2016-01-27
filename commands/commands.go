@@ -50,7 +50,7 @@ func SendMessage(cs *model.CloudService, d *model.Device, msg string) bool {
     sc := model.ServerCommand{d.ID, msg}
     o,_ := json.Marshal(sc)
     req := prepareRequest(MessageCommand,cs, cs.Creds, bytes.NewReader(o))
-    fmt.Println("\nSending message on devive [%s]: '[%s]'/n",
+    fmt.Println("\nSending message on device [%s]: '[%s]'/n",
         d.DisplayName, msg)
     if _,err :=executeCommand(req); err!=nil {
         return false
