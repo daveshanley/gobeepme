@@ -55,7 +55,7 @@ func CollectUsername() string {
 
 func CollectPassword() string {
     fmt.Print("iCloud Password: ")
-    pw := gopass.GetPasswd()
+    pw,_ := gopass.GetPasswd()
     return strings.TrimSpace(string(pw))
 }
 
