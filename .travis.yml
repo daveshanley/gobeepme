@@ -8,6 +8,3 @@ go:
  - 1.5.3
  - release
  - tip
-
-script:
- - go test -v ./...
