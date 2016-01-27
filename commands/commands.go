@@ -89,13 +89,12 @@ func executeCommand(req *http.Request) (*http.Response, error) {
     return resp, err
 }
 
+// Authenticate user
 func Authenticate(c model.Creds) (model.CloudService, error) {
     req, _ := http.NewRequest("POST", FPIServiceURL + c.AppleID + InitCommand, bytes.NewBufferString(""))
     setOriginHeader(req)
     setBasicAuth(req, c)
     resp,_ :=executeCommand(req)
-
-    // validate response code
     if resp.StatusCode == http.StatusForbidden ||
         resp.StatusCode == http.StatusUnauthorized {
         return model.CloudService{},
@@ -105,7 +104,7 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
         resp.Header.Get(ServiceScope), c}, nil
 }
 
-// make a new request for our most recent devices
+// Make a new request for our most recent devices
 func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
     req := prepareRequest(InitCommand,cs, cs.Creds, bytes.NewReader([]byte("")))
     fmt.Println("\nRefreshing Device list...")
