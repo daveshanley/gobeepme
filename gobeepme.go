@@ -9,7 +9,9 @@ import (
     "github.com/daveshanley/gobeepme/commands"
 )
 
+func Dummy() {
 
+}
 
 func main() {
 

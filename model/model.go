@@ -86,3 +86,7 @@ func (d *DeviceResult) GetDeviceByDisplayName(dn string) *Device {
     }
     return nil
 }
+
+func Dummy() {
+
+}

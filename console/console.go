@@ -86,3 +86,7 @@ func WelcomeBanner() {
 func PrintServiceMode() {
     fmt.Println("Starting beepme as a service, listening on port 37556")
 }
+
+func Dummy() {
+
+}

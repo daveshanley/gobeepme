@@ -116,3 +116,7 @@ func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
     }
     return dv, nil
 }
+
+func Dummy() {
+
+}
