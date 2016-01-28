@@ -4,6 +4,7 @@ import (
     "github.com/daveshanley/gobeepme/model"
     "github.com/olekukonko/tablewriter"
     "github.com/howeyc/gopass"
+    "github.com/fatih/color"
     "fmt"
     "strconv"
     "os"
@@ -46,7 +47,7 @@ func CollectUsername() string {
     r := bufio.NewReader(os.Stdin)
     var username string
     for username == "" {
-        fmt.Print("iCloud Username: ")
+        fmt.Print("\niCloud Username: ")
         u, _ := r.ReadString('\n')
         username = strings.TrimSpace(u)
     }
@@ -79,8 +80,8 @@ func CollectDeviceSelection(size int) int {
 }
 
 func WelcomeBanner() {
-    fmt.Println("\nbeepme - page your iOS device")
-    fmt.Println("-----------------------------\n")
+    color.Cyan("\nbeepme - page your iOS device")
+    color.Cyan("-----------------------------\n")
 }
 
 func PrintServiceMode() {

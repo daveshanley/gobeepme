@@ -19,7 +19,7 @@ func main() {
     uf := flag.String("user", "", "Your iCloud ID / AppleID (normally an email)")
     pf := flag.String("pass", "", "Pretty sure this is self explanatory")
     nf := flag.String("name", "", "Name of the iOS device you want to beep")
-    mf := flag.String("msg", "", "Message to be sent to iOS device")
+    mf := flag.String("msg", "gobeepme is beeping you!", "Message to be sent to iOS device")
     sf := flag.Bool("server", false, "Run as http service")
 
     var un, pw, dn, msg string
@@ -35,7 +35,6 @@ func main() {
         console.PrintServiceMode()
         return
     }
-
 
     // print welcome!
     console.WelcomeBanner()
@@ -56,11 +55,7 @@ func main() {
     } else {
         dn = strings.TrimSpace(nfVal)
     }
-    if mfVal == "" {
-        msg = "gobeepme is beeping you!" // message
-    } else {
-        msg = strings.TrimSpace(mfVal)
-    }
+    msg = strings.TrimSpace(mfVal)
 
     var cr = model.Creds{AppleID: un, Password: pw}
     var cs model.CloudService
@@ -78,20 +73,22 @@ func main() {
     }
 
     var dID int
-    if dn == "" {
+    var dv *model.Device
+    if nfVal == "" {
         console.PrintDevices(&d)
         dID = console.CollectDeviceSelection(len(d.Devices))
+        dv, err = d.GetDeviceByIndex(dID-1)
+        if err!=nil {
+            fmt.Printf("Unable to extract device: %v\n\n", err)
+            return
+        }
+    } else {
+        dv, err = d.GetDeviceByName(dn)
+        if err!=nil {
+            fmt.Printf("Unable to locate iOS device: %v\n\n", err)
+            return
+        }
     }
-    msg = console.CollectMessageSelection()
-
-    /*
-    _, err == d.GetDeviceByIndex(dID - 1)
-    if err != nil {
-        fmt.Printf("\nUnable to extract device: %v", err)
-        return
-    }
-    */
-
-    fmt.Printf("\nDelivered! %s %d\n", msg, dID)
-
+    commands.PlaySound(&cs, dv, msg)
+    //fmt.Printf("\nPlaying sound.. dummy: %s: %s\n\n", dv.Name, msg)
 }

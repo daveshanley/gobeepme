@@ -8,4 +8,3 @@ func TestDummy(t *testing.T) {
         t.Errorf("failed %b", b)
     }
 }
-

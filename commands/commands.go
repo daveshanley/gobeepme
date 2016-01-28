@@ -12,6 +12,7 @@ import (
     "encoding/json"
     "bytes"
     "fmt"
+    //"io/ioutil"
 )
 
 const (
@@ -21,6 +22,7 @@ const (
     ServiceScope    string = "X-Apple-MMe-Scope"
     ServiceEndpoint string = "/fmipservice/device/"
     InitCommand     string = "/initClient"
+    RefreshCommand  string = "/refreshClient"
     SoundCommand    string = "/playSound"
     MessageCommand  string = "/sendMessage"
 )
@@ -37,8 +39,8 @@ func PlaySound(cs *model.CloudService, d *model.Device, msg string) bool {
     sc := model.ServerCommand{d.ID, msg}
     o,_ := json.Marshal(sc)
     req := prepareRequest(SoundCommand,cs, cs.Creds, bytes.NewReader(o))
-    fmt.Println("\nPlaying sound on device [%s] and sending message: '[%s]'/n",
-        d.DisplayName, msg)
+    fmt.Printf("Playing sound on device '%s' and sending message: '%s'\n\n",
+        d.Name, msg)
     if _,err :=executeCommand(req); err!=nil {
         return false
     }
@@ -50,7 +52,7 @@ func SendMessage(cs *model.CloudService, d *model.Device, msg string) bool {
     sc := model.ServerCommand{d.ID, msg}
     o,_ := json.Marshal(sc)
     req := prepareRequest(MessageCommand,cs, cs.Creds, bytes.NewReader(o))
-    fmt.Println("\nSending message on device [%s]: '[%s]'/n",
+    fmt.Printf("Sending message on device [%s]: '[%s]'\n\n",
         d.DisplayName, msg)
     if _,err :=executeCommand(req); err!=nil {
         return false
@@ -85,7 +87,6 @@ func executeCommand(req *http.Request) (*http.Response, error) {
     if err != nil {
         panic(err)
     }
-    defer resp.Body.Close()
     return resp, err
 }
 
@@ -107,7 +108,6 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
 // Make a new request for our most recent devices
 func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
     req := prepareRequest(InitCommand,cs, cs.Creds, bytes.NewReader([]byte("")))
-    fmt.Println("\nRefreshing Device list...")
     resp,_ :=executeCommand(req)
     var dv model.DeviceResult
     if err := json.NewDecoder(resp.Body).Decode(&dv); err != nil {

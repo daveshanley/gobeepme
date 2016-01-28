@@ -71,20 +71,11 @@ func (d *DeviceResult) GetDeviceByIndex(index int) (*Device, error) {
 
 func (d *DeviceResult) GetDeviceByName(name string) (*Device, error) {
     for _, d := range d.Devices {
-        if strings.ToLower(d.DisplayName) == strings.ToLower(name) {
+        if strings.ToLower(d.Name) == strings.ToLower(name) {
             return &d, nil
         }
     }
     return nil, fmt.Errorf("No Device with name [%s] located", name)
-}
-
-func (d *DeviceResult) GetDeviceByDisplayName(dn string) *Device {
-    for _, r := range d.Devices {
-        if r.DisplayName == dn {
-            return &r
-        }
-    }
-    return nil
 }
 
 func Dummy() {
