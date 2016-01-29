@@ -106,7 +106,7 @@ func BeepDevice(w http.ResponseWriter, req *http.Request) {
     if err :=  json.NewEncoder(w).Encode(r); err != nil {
         panic(err)
     }
-    //commands.PlaySound(cs, dv, sc.Message)
+    commands.PlaySound(cs, dv, sc.Message)
     return
 }
 
