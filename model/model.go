@@ -7,18 +7,23 @@ package model
 
 import (
     "fmt"
-    "errors"
     "strings"
 )
 
 type Creds struct {
-    AppleID  string `json:"apple_id"`
-    Password string `json:"password"`
+    AppleID         string `json:"apple_id"`
+    Password        string `json:"password"`
+}
+
+type ServiceCommand struct {
+    Creds
+    Message         string `json:"message"`
+    Name            string `json:"name"`
 }
 
 type DeviceResult struct {
-    StatusCode string `json:"statusCode"`
-    Devices    []Device `json:"content"`
+    StatusCode      string `json:"statusCode"`
+    Devices         []Device `json:"content"`
 }
 
 type Device struct {
@@ -34,20 +39,39 @@ type Device struct {
 }
 
 type DeviceLocation struct {
-    Longitude float64 `json:"longitude"`
-    Latitude  float64 `json:"latitude"`
+    Longitude       float64 `json:"longitude"`
+    Latitude        float64 `json:"latitude"`
 }
 
 type ServerCommand struct {
-    DeviceID string `json:"device"`
-    Message  string `json:"subject"`
+    DeviceID        string `json:"device"`
+    Message         string `json:"subject"`
 }
 
 type CloudService struct {
-    Host  string
-    Scope string
-    Creds Creds
+    Host            string
+    Scope           string
+    Creds           Creds
 }
+
+type ServiceResponse struct {
+    Error           bool `json:"error"`
+    Message         string `json:"message"`
+}
+
+const (
+    AuthFailedMessage   string = "Authentication failed: %v"
+    ListDevicesFailed   string = "Unable to list iOS devices: %v"
+    NoCredentials       string = "No authentication credentials were submitted"
+    CommandMalformed    string = "Server command malformed"
+    CommandMissingAttr  string = "Server command missing authentication, or iOS device name"
+    NoDeviceName        string = "No device with name [%s] located"
+    NoDeviceIndex       string = "No device with index [%d] located"
+    NoDeviceID          string = "No device with id [%s] located"
+    DefaultMessage      string = "Beep Beep!"
+    PlayingSound        string = "Playing sound on iOS Device [%s] with message: '%s'"
+    StartingService     string = "Starting beepme as a service."
+)
 
 func (d *DeviceResult) GetDevice(id string) (*Device, error) {
     for _, r := range d.Devices {
@@ -55,7 +79,7 @@ func (d *DeviceResult) GetDevice(id string) (*Device, error) {
             return &r, nil
         }
     }
-    return nil, errors.New("No device found")
+    return nil, fmt.Errorf(NoDeviceID, id)
 }
 
 func (d *DeviceResult) GetDeviceByIndex(index int) (*Device, error) {
@@ -66,7 +90,7 @@ func (d *DeviceResult) GetDeviceByIndex(index int) (*Device, error) {
         }
         i++
     }
-    return nil, fmt.Errorf("No Device with index [%d] located", index)
+    return nil, fmt.Errorf(NoDeviceIndex, index)
 }
 
 func (d *DeviceResult) GetDeviceByName(name string) (*Device, error) {
@@ -75,7 +99,7 @@ func (d *DeviceResult) GetDeviceByName(name string) (*Device, error) {
             return &d, nil
         }
     }
-    return nil, fmt.Errorf("No Device with name [%s] located", name)
+    return nil, fmt.Errorf(NoDeviceName, name)
 }
 
 func Dummy() {

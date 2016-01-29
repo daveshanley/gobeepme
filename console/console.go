@@ -80,13 +80,35 @@ func CollectDeviceSelection(size int) int {
 }
 
 func WelcomeBanner() {
-    color.Cyan("\nbeepme - page your iOS device")
+    color.Cyan("\ngobeepme - page your iOS device")
     color.Cyan("-----------------------------\n")
 }
 
-func PrintServiceMode() {
-    fmt.Println("Starting beepme as a service, listening on port 37556")
+func PrintAuthFailed(err error) {
+    fmt.Printf(model.AuthFailedMessage, err)
+    fmt.Println("")
 }
+
+func PrintNoDeviceFound(d string) {
+    fmt.Printf(model.NoDeviceName, d)
+    fmt.Println("")
+}
+
+func PrintPlayingSound(name, msg string) {
+    fmt.Printf(model.PlayingSound, name, msg)
+    fmt.Println("")
+}
+
+func PrintServiceMode() {
+    fmt.Println(model.StartingService)
+}
+
+func PrintKeyCertError() {
+    fmt.Println("Please supply a service.key (private key) and service certficiate (service.pem)")
+    fmt.Println("")
+}
+
+
 
 func Dummy() {
 

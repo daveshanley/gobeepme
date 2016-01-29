@@ -7,6 +7,7 @@ import (
     "github.com/daveshanley/gobeepme/model"
     "github.com/daveshanley/gobeepme/console"
     "github.com/daveshanley/gobeepme/commands"
+    "github.com/daveshanley/gobeepme/service"
 )
 
 func Dummy() {
@@ -19,8 +20,11 @@ func main() {
     uf := flag.String("user", "", "Your iCloud ID / AppleID (normally an email)")
     pf := flag.String("pass", "", "Pretty sure this is self explanatory")
     nf := flag.String("name", "", "Name of the iOS device you want to beep")
-    mf := flag.String("msg", "gobeepme is beeping you!", "Message to be sent to iOS device")
-    sf := flag.Bool("server", false, "Run as http service")
+    mf := flag.String("msg", model.DefaultMessage, "Message to be sent to iOS device")
+    sf := flag.Bool("service", false, "Run as https service")
+    portf := flag.Int("port", 9443, "(service only) Port to run https service on")
+    certf := flag.String("key", "", "(service only) private server key")
+    keyf := flag.String("cert", "", "(service only) certificate to use")
 
     var un, pw, dn, msg string
     flag.Parse()
@@ -29,10 +33,13 @@ func main() {
     nfVal := *nf
     mfVal := *mf
     sfVal := *sf
+    portVal := *portf
+    keyVal := *keyf
+    certVal := *certf
 
     // check for service mode
     if sfVal {
-        console.PrintServiceMode()
+        service.StartService(portVal, certVal, keyVal)
         return
     }
 
@@ -62,7 +69,7 @@ func main() {
 
     cs, err := commands.Authenticate(cr)
     if err != nil {
-        fmt.Printf("\nAuthentication Failed: %v", err)
+        console.PrintAuthFailed(err)
         return
     }
 
@@ -79,16 +86,16 @@ func main() {
         dID = console.CollectDeviceSelection(len(d.Devices))
         dv, err = d.GetDeviceByIndex(dID-1)
         if err!=nil {
-            fmt.Printf("Unable to extract device: %v\n\n", err)
+            console.PrintNoDeviceFound(string(dID))
             return
         }
     } else {
         dv, err = d.GetDeviceByName(dn)
         if err!=nil {
-            fmt.Printf("Unable to locate iOS device: %v\n\n", err)
+            console.PrintNoDeviceFound(dn)
             return
         }
     }
+    console.PrintPlayingSound(dv.Name, msg)
     commands.PlaySound(&cs, dv, msg)
-    //fmt.Printf("\nPlaying sound.. dummy: %s: %s\n\n", dv.Name, msg)
 }

@@ -34,31 +34,7 @@ var (
     cookieJar, _ = cookiejar.New(nil)
 )
 
-// Play a sound (and send a message) to iOS Device
-func PlaySound(cs *model.CloudService, d *model.Device, msg string) bool {
-    sc := model.ServerCommand{d.ID, msg}
-    o,_ := json.Marshal(sc)
-    req := prepareRequest(SoundCommand,cs, cs.Creds, bytes.NewReader(o))
-    fmt.Printf("Playing sound on device '%s' and sending message: '%s'\n\n",
-        d.Name, msg)
-    if _,err :=executeCommand(req); err!=nil {
-        return false
-    }
-    return true
-}
 
-// Send a message to iOS device
-func SendMessage(cs *model.CloudService, d *model.Device, msg string) bool {
-    sc := model.ServerCommand{d.ID, msg}
-    o,_ := json.Marshal(sc)
-    req := prepareRequest(MessageCommand,cs, cs.Creds, bytes.NewReader(o))
-    fmt.Printf("Sending message on device [%s]: '[%s]'\n\n",
-        d.DisplayName, msg)
-    if _,err :=executeCommand(req); err!=nil {
-        return false
-    }
-    return true
-}
 
 func setOriginHeader(req *http.Request) {
     req.Header.Set("Origin",Referrer)
@@ -90,6 +66,28 @@ func executeCommand(req *http.Request) (*http.Response, error) {
     return resp, err
 }
 
+// Play a sound (and send a message) to iOS Device
+func PlaySound(cs *model.CloudService, d *model.Device, msg string) bool {
+    sc := model.ServerCommand{d.ID, msg}
+    o,_ := json.Marshal(sc)
+    req := prepareRequest(SoundCommand,cs, cs.Creds, bytes.NewReader(o))
+    if _,err :=executeCommand(req); err!=nil {
+        return false
+    }
+    return true
+}
+
+// Send a message to iOS device
+func SendMessage(cs *model.CloudService, d *model.Device, msg string) bool {
+    sc := model.ServerCommand{d.ID, msg}
+    o,_ := json.Marshal(sc)
+    req := prepareRequest(MessageCommand,cs, cs.Creds, bytes.NewReader(o))
+    if _,err :=executeCommand(req); err!=nil {
+        return false
+    }
+    return true
+}
+
 // Authenticate user
 func Authenticate(c model.Creds) (model.CloudService, error) {
     req, _ := http.NewRequest("POST", FPIServiceURL + c.AppleID + InitCommand, bytes.NewBufferString(""))
@@ -99,7 +97,7 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
     if resp.StatusCode == http.StatusForbidden ||
         resp.StatusCode == http.StatusUnauthorized {
         return model.CloudService{},
-        fmt.Errorf("Unable to authenticate with ['%s'], Check credentials.\n\n", c.AppleID)
+        fmt.Errorf("Unable to authenticate with '%s', Check credentials.", c.AppleID)
     }
     return model.CloudService{resp.Header.Get(ServiceHost),
         resp.Header.Get(ServiceScope), c}, nil
@@ -112,7 +110,7 @@ func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
     var dv model.DeviceResult
     if err := json.NewDecoder(resp.Body).Decode(&dv); err != nil {
         return model.DeviceResult{},
-        fmt.Errorf("Error, unable to decode JSON : %v", err)
+        fmt.Errorf("Error, unable to decode JSON: %v", err)
     }
     return dv, nil
 }
