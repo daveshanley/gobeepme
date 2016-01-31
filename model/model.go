@@ -2,7 +2,7 @@
 // Use of this source code is governed by a The MIT License
 // license that can be found in the LICENSE file.
 
-// Package model provides data models for server resonses, devices and JSON mappings.
+// Package model provides data models for server responses, devices and JSON mappings.
 package model
 
 import (

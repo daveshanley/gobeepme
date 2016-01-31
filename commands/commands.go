@@ -97,7 +97,7 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
     if resp.StatusCode == http.StatusForbidden ||
         resp.StatusCode == http.StatusUnauthorized {
         return model.CloudService{},
-        fmt.Errorf("Unable to authenticate with '%s', Check credentials.", c.AppleID)
+        fmt.Errorf("your credentials were rejected, try again.")
     }
     return model.CloudService{resp.Header.Get(ServiceHost),
         resp.Header.Get(ServiceScope), c}, nil
@@ -110,7 +110,7 @@ func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
     var dv model.DeviceResult
     if err := json.NewDecoder(resp.Body).Decode(&dv); err != nil {
         return model.DeviceResult{},
-        fmt.Errorf("Error, unable to decode JSON: %v", err)
+        fmt.Errorf("unable to decode JSON: %v", err)
     }
     return dv, nil
 }

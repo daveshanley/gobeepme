@@ -31,6 +31,8 @@ func authenticate(w http.ResponseWriter, cr model.Creds) (*model.CloudService, e
 
 func setHeaders(w http.ResponseWriter) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Access-Control-Allow-Method", "POST, GET")
 }
 
 func checkServiceCommand(sc model.ServiceCommand) bool {
@@ -119,7 +121,7 @@ func StartService(port int, key, cert string) {
     console.PrintServiceMode()
     router := NewRouter()
     //log.Fatal(http.ListenAndServeTLS(":9443", cert, key, router))
-    log.Fatal(http.ListenAndServeTLS(":9443", "server.pem", "server.key", router))
+    log.Fatal(http.ListenAndServeTLS(":9443", "fullchain.pem", "privatekey.pem", router))
 }
 
 func Dummy() {
