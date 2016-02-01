@@ -16,7 +16,6 @@ export class ModelService {
         this.dataService = dataService;
     }
 
-
     getDevices (creds: Creds, success, fail) {
         this.dataService.getDevices(creds)
             .subscribe(

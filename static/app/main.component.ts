@@ -21,9 +21,10 @@ import {Router}                         from "angular2/router";
 ])
 
 export class MainComponent {
+    modelService:modelService;
 
-    constructor(private _modelService: ModelService, private _creds: Creds, private _router: Router) {
-
+    constructor(modelService: ModelService, private _creds: Creds, private _router: Router) {
+        this.modelService = modelService;
     }
 
     authenticatedEvent() {

@@ -1,0 +1,6 @@
+<div class="battery" [ngClass]="{unknown:(batteryLevel<=0), low:(batteryLevel<0.2 && batteryLevel>=0)}">
+    <div class="level" [style.width]="batteryLevel | percent" [ngClass]="{low:(batteryLevel<0.2)}"></div>
+    <span class="level-label" *ngIf="batteryLevel<=0">?</span>
+    <span class="level-label" *ngIf="batteryLevel==1">FULL</span>
+    <span class="level-label"  *ngIf="batteryLevel>0 && batteryLevel<1">{{batteryLevel | percent}}</span>
+</div>
