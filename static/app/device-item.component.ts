@@ -5,7 +5,7 @@ import {BatteryComponent}       from "./battery.component";
 import {LocationComponent}      from "./location.component";
 
 @Component({
-    selector: "device-item",
+    selector:       "device-item",
     templateUrl:    './app/device-item.component.html',
     directives:     [BatteryComponent, LocationComponent]
 })

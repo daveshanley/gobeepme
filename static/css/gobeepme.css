@@ -9,10 +9,14 @@ header {
 .jumbotron {
     background-color: rgba(236, 238, 239, 0.33);
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
 }
 
+
+.beepbell h1 {
+    margin-bottom: 15px;
+}
 .ng-valid[required] {
     border-bottom: 1px solid #00a600;
 }
@@ -36,8 +40,8 @@ input[type="password"] {
 .alert-danger {
     font-size: 14px;
     position: absolute;
-    top: -65px;
-    width: 100%;
+    top: -56px;
+    width: 95%;
 }
 
 .batt {

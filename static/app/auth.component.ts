@@ -4,10 +4,11 @@ import {Creds}                                           from './model/creds.mod
 import {DataService}                                     from './services/data.service'
 import {ModelService}                                    from "./services/model.service";
 import {Router, ROUTER_DIRECTIVES}                       from "angular2/router";
+import {SpinnerComponent}                                from "./utils/spinner.component";
 
 @Component({
     templateUrl: './app/auth.component.html',
-    directives: [NgClass, ROUTER_DIRECTIVES],
+    directives: [NgClass, ROUTER_DIRECTIVES, SpinnerComponent],
     providers:  [ModelService]
 })
 
@@ -17,7 +18,9 @@ export class AuthComponent {
     modelService:ModelService;
     model:Creds;
 
-    constructor(dataService: DataService, modelService: ModelService, creds: Creds, private _router: Router) {
+    constructor(dataService: DataService,
+                modelService: ModelService, creds: Creds,
+                private _router: Router) {
         this.dataService = dataService;
         this.modelService = modelService;
         this.model = creds;
@@ -44,7 +47,7 @@ export class AuthComponent {
                 }, 500);
                 break;
             default:
-                this.errorMessage = "Can't connect to gobeepme service! "
+                this.errorMessage = "Can't connect to gobeepme service!";
                 this.authenticating = false; this.error = true;
                 setTimeout( () => {
                     this.fadeOut=true; // no animations yet!
@@ -53,7 +56,9 @@ export class AuthComponent {
     }
     auth() {
         this.authenticating = true;
-        this.modelService.auth(this.model, (r) => { this.result(r)}, (r) => { this.authFailed(r)})
+        this.modelService.auth(this.model,
+            (r) => { this.result(r)}, (r) => { this.authFailed(r)}
+        );
     }
 
     result(result) {

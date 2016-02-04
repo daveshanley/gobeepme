@@ -1,9 +1,10 @@
-<h3>Select a device to beep.</h3>
+<message-input (messageUpdate)="messageChanged($event)"></message-input>
+<h5>To the following device...</h5>
 <div class="row device-header">
     <div class="col-md-1">batt</div>
     <div class="col-md-8">name</div>
     <div class="col-md-3">location</div>
 </div>
 <div class="row device-item" *ngFor="#device of devices">
-       <device-item [device]="device"></device-item>
+       <device-item [device]="device" (click)="selectDevice(device)"></device-item>
 </div>

@@ -8,28 +8,28 @@ import {OnActivate}                                         from "angular2/route
 import {BatteryComponent}                                   from "./battery.component";
 import {LocationComponent}                                  from "./location.component";
 import {DeviceItemComponent}                                from "./device-item.component";
+import {MessageComponent}                                   from "./message.component";
 
 @Component({
     templateUrl:    './app/device-list.component.html',
     providers:      [ModelService],
-    directives:     [DeviceItemComponent, BatteryComponent, LocationComponent]
+    directives:     [DeviceItemComponent, BatteryComponent, LocationComponent, MessageComponent]
 
 })
-
 export class DeviceListComponent implements OnInit, OnActivate {
 
     devices: Device[];
+    message:string;
 
     constructor(dataService: DataService,
                 private _creds: Creds,
                 private _router: Router,
                 private _modelService: ModelService) {
-
-    }
+}
 
     ngOnInit() {
         if(!this._creds.authenticated) {
-            this._router.navigate( ["Authenticate", {}] );
+            //this._router.navigate( ["Authenticate", {}] );
         }
     }
 
@@ -46,5 +46,12 @@ export class DeviceListComponent implements OnInit, OnActivate {
         this.devices = result;
     }
 
+    selectDevice(item) {
+        console.log('beeping device with message: ', this.message)
+    }
+
+    messageChanged(msg) {
+        this.message = msg;
+    }
 
 }

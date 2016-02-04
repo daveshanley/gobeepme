@@ -21,7 +21,7 @@ import {Router}                         from "angular2/router";
 ])
 
 export class MainComponent {
-    modelService:modelService;
+    modelService:ModelService;
 
     constructor(modelService: ModelService, private _creds: Creds, private _router: Router) {
         this.modelService = modelService;
@@ -32,4 +32,11 @@ export class MainComponent {
         this._router.navigate( ["ListDevices", {}] );
 
     }
+
+    deviceSelected(item) {
+        console.log('selected', item)
+    }
+
+    everyFiveSeconds() { console.log('five seconds'); }
+
 }

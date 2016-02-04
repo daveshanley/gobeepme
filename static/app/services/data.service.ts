@@ -24,7 +24,7 @@ export class DataService {
     auth (creds: Creds) {
         var cr = creds.toJSON()
         //return this.http.post('https://localhost:9443', JSON.stringify(cr))
-        //    .map(res => <Device[]> res.json())
+          //  .map(res => <Device[]> res.json())
         return this.http.get('test.json')
             .map(res => <Device[]> res.json())
 
