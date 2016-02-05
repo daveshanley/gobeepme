@@ -1,10 +1,14 @@
-<message-input (messageUpdate)="messageChanged($event)"></message-input>
-<h5>To the following device...</h5>
-<div class="row device-header">
-    <div class="col-md-1">batt</div>
-    <div class="col-md-8">name</div>
-    <div class="col-md-3">location</div>
-</div>
-<div class="row device-item" *ngFor="#device of devices">
-       <device-item [device]="device" (click)="selectDevice(device)"></device-item>
+<app-header [shrunk]="true" (messageEvent)="messageChanged($event)"></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-deck-wrapper">
+                <div class="card-deck">
+                    <div class="card" *ngFor="#device of devices">
+                        <device-item [device]="device" (click)="selectDevice(device)"></device-item>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

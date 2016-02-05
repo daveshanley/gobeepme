@@ -37,6 +37,4 @@ export class MainComponent {
         console.log('selected', item)
     }
 
-    everyFiveSeconds() { console.log('five seconds'); }
-
 }

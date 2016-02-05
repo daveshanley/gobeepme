@@ -9,11 +9,12 @@ import {BatteryComponent}                                   from "./battery.comp
 import {LocationComponent}                                  from "./location.component";
 import {DeviceItemComponent}                                from "./device-item.component";
 import {MessageComponent}                                   from "./message.component";
+import {HeaderComponent}                                    from "./utils/header.component";
 
 @Component({
     templateUrl:    './app/device-list.component.html',
     providers:      [ModelService],
-    directives:     [DeviceItemComponent, BatteryComponent, LocationComponent, MessageComponent]
+    directives:     [DeviceItemComponent, BatteryComponent, LocationComponent, MessageComponent, HeaderComponent]
 
 })
 export class DeviceListComponent implements OnInit, OnActivate {

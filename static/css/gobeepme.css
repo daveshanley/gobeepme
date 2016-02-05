@@ -5,11 +5,23 @@ header {
 .beepbell {
     font-size: 9rem;
     color: #EC971F;
+    transition: font-size 500ms, position 500ms, transform 500ms;
+
 }
 .jumbotron {
     background-color: rgba(236, 238, 239, 0.33);
     padding-top: 2rem;
     padding-bottom: 1rem;
+    height: 300px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.beepytitle {
+    color: #9E9E9E;
+}
+
+.beepytitle strong {
+    color: #F0AD4E;
 
 }
 
@@ -46,6 +58,7 @@ input[type="password"] {
 
 .batt {
     text-align:center;
+    width: 50px;
 }
 
 .battery {
@@ -79,39 +92,136 @@ input[type="password"] {
 }
 
 
-.device-header {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgba(236, 238, 239, 0.47);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    margin-top: 20px;
-    font-weight:bold;
-    color: #818a91;
 
-}
-
-.device-item {
+device-item {
     border-top: 1px solid #e5e5e5;
     padding-top: 10px;
     padding-bottom: 10px;
-
+    width: 100%;
+    display: block;
 }
-
-.device-item:hover {
+device-item:hover {
     background-color: rgba(243, 245, 246, 0.47);
     cursor:pointer;
 }
-
-.device-item:active {
+device-item:active {
     background-color: rgba(216, 218, 219, 0.47);
 }
-
-.location {
-    width: 100px;
-    height: 50px;
+location {
+    width: 100%;
+    height: 100px;
 }
 
+
+message-input {
+    position: absolute;
+    width: 500px;
+    //top: -26px;
+    top: -1.3rem;
+    left: 20rem;
+
+}
+
+.messagelabel {
+    font-size: 0.9rem;
+    color: #B9B9B9;
+}
+
+message-input input[type="text"] { // overriding for now
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 3rem;
+    font-size: 1.4rem;
+    color: #818a91;
+    border: 1px solid #ccc;
+    margin-top:0.5rem;
+}
+
+@keyframes shrinkHeader {
+    to { height : 100px;}
+}
+
+.header-container {
+    position:relative;
+}
+
+.smallerHeader {
+    animation: shrinkHeader 400ms 500ms ease-out;
+    animation-fill-mode: forwards
+}
+
+.smallerBell {
+    animation: fadeOutBell 500ms ease-out, moveBell 1ms 500ms ease-out, fadeInBell 1s 900ms ease-out,
+        ringBell 1s 1.2s ease-out;
+    animation-fill-mode: forwards
+}
+
+@keyframes fadeOutBell {
+    from { opacity: 1}
+    to { opacity: 0}
+}
+
+@keyframes moveBell {
+    to {  position: absolute;  font-size: 4rem; top: -1rem}
+}
+
+@keyframes moveTitle {
+    to {  position: absolute; margin-top: -0.6rem;}
+}
+
+@keyframes ringBell {
+    20% {
+        -webkit-transform: rotate3d(0, 0, 1, 15deg);
+        transform: rotate3d(0, 0, 1, 15deg);
+    }
+
+    40% {
+        -webkit-transform: rotate3d(0, 0, 1, -10deg);
+        transform: rotate3d(0, 0, 1, -10deg);
+    }
+
+    60% {
+        -webkit-transform: rotate3d(0, 0, 1, 5deg);
+        transform: rotate3d(0, 0, 1, 5deg);
+    }
+
+    80% {
+        -webkit-transform: rotate3d(0, 0, 1, -5deg);
+        transform: rotate3d(0, 0, 1, -5deg);
+    }
+
+    to {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+.ringBell {
+    -webkit-transform-origin: top center;
+    transform-origin: top center;
+    -webkit-animation-name: ringBell;
+    animation-name: ringBell;
+}
+
+
+
+
+@keyframes fadeInBell {
+    from { opacity: 0}
+    to { opacity: 1}
+}
+
+.movedTitle {
+    animation: fadeOutBell 300ms 200ms ease-out, moveTitle 1ms 500ms ease-out, fadeInBell 1s 1s ease-out;
+    animation-fill-mode: forwards;
+    left: 6rem;
+}
+
+
+.hideStrap {
+    animation: fadeOutBell 200ms 300ms ease-out;
+    animation-fill-mode: forwards;
+}
 
 /* http://tobiasahlin.com/spinkit/ */
 .sk-cube-grid {
@@ -268,6 +378,21 @@ input[type="password"] {
     }
 }
 
+
+
+
+
+.card-deck {
+    margin: 0 -1.25rem;
+}
+
+.card-deck .card {
+    display: table-cell;
+    width: auto;
+    vertical-align: top;
+    float: left;
+    margin-left: .75rem;
+}
 
 
 

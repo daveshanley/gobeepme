@@ -10,7 +10,7 @@ export class MessageComponent implements OnInit {
     @Output()  messageUpdate:EventEmitter<String> = new EventEmitter();
 
     ngOnInit() {
-        this.message = "Beep beep!";
+        this.message = "Beep!";
         this.messageChange(); // fire the default up the stack
     }
 

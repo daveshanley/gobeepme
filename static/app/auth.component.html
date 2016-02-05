@@ -1,21 +1,30 @@
-<div [hidden]="authenticating||authenticated">
-    <div [ngClass]="{fadeOut:fadeOut, animated:true, alert:true, 'alert-danger':true}" role="alert" [hidden]="!error">
-       <strong>Oh dear!</strong> {{errorMessage}}
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div [hidden]="authenticating||authenticated">
+                <div [ngClass]="{fadeOut:fadeOut, animated:true, alert:true, 'alert-danger':true}" role="alert"
+                     [hidden]="!error">
+                    <strong>Oh dear!</strong> {{errorMessage}}
+                </div>
+                <form (ngSubmit)="auth()" #authForm="ngForm">
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control" required id="apple_id"
+                               placeholder="Apple ID" [(ngModel)]="model.appleid" ngControl="appleid">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="password" class="form-control" required id="password"
+                               placeholder="Password" [(ngModel)]="model.password" ngControl="password">
+                    </fieldset>
+                    <button type="submit" class="btn btn-secondary" [disabled]="!authForm.form.valid">Authenticate
+                    </button>
+                </form>
+            </div>
+            <div [hidden]="!authenticating">
+                <spinner></spinner>
+            </div>
+        </div>
     </div>
-    <form (ngSubmit)="auth()" #authForm="ngForm">
-        <fieldset class="form-group">
-            <input type="text" class="form-control" required id="apple_id"
-                   placeholder="Apple ID" [(ngModel)]="model.appleid" ngControl="appleid">
-        </fieldset>
-        <fieldset class="form-group">
-            <input type="password" class="form-control" required id="password"
-                   placeholder="Password" [(ngModel)]="model.password" ngControl="password">
-        </fieldset>
-        <button type="submit" class="btn btn-secondary" [disabled]="!authForm.form.valid">Authenticate</button>
-    </form>
-</div>
-<div [hidden]="!authenticating">
-    <spinner></spinner>
 </div>
 
 

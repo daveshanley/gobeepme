@@ -1,20 +1,23 @@
-<div class="col-md-1 batt">
-    <battery [batteryLevel]="device.BatteryLevel"></battery>
-</div>
-<div class="col-md-8">
-    <strong>{{device.Name}}</strong><br/>
-    <em>
-        <small class="text-muted">
-            {{device.deviceDisplayName}}
-        </small>
-    </em>
-</div>
-<div class="col-md-3 location-container">
+
+
     <location [lon]="device.location.longitude"
               [lat]="device.location.latitude"
               [name]="device.Name"
-              [width]="600"
-              [height]="300">
+              [width]="240"
+              [height]="100">
     </location>
-</div>
+
+    <div class="card-block">
+
+
+        <h6 class="card-title">{{device.Name}}</h6>
+
+
+        <p class="card-text"><small class="text-muted">{{device.deviceDisplayName}}</small></p>
+
+        <div class="batt">
+            <battery [batteryLevel]="device.BatteryLevel"></battery>
+        </div>
+
+    </div>
 

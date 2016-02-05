@@ -1,0 +1,14 @@
+<section class="jumbotron" [ngClass]="{smallerHeader:shrunk}">
+    <div class="container header-container">
+        <h1 class="beepbell" [ngClass]="{smallerBell:shrunk}">
+            <i class="fa fa-bell-o"></i>
+        </h1>
+        <h1 class="beepytitle" [ngClass]="{movedTitle:shrunk}">
+            go<strong>beep</strong>me
+        </h1>
+        <p class="lead text-muted" [ngClass]="{hideStrap:shrunk}">
+            Tired of losing your iOS device?
+        </p>
+        <message-input (messageUpdate)="messageChanged($event)"></message-input>
+    </div>
+</section>

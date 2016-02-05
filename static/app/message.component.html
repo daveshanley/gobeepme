@@ -1,6 +1,4 @@
 <form>
-    <fieldset class="form-group">
-        <h5>Send the message...</h5>
-        <input type="text" class="form-control" id="message" [(ngModel)]="message" (ngModelChange)="messageChange()"/>
-    </fieldset>
+    <span class="messagelabel">Ping your iOS device and say....</span>
+    <input type="text" class="form-control" [(ngModel)]="message" (ngModelChange)="messageChange()"/>
 </form>

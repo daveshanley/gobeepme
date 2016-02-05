@@ -1,18 +1,9 @@
 import {Component, Input}       from "angular2/core";
-import {NgClass}                from "angular2/common";
 import {OnInit} from "angular2/core";
 
 @Component({
     selector: "location",
-    template:    `
-    <div>
-     <span class="map"> <img class="location" src="{{smallUrl}}"/>
-        <span class="popover above"> <img src="{{largeUrl}}"/></span>
-      </span>
-      </div>
-
-   `,
-    directives: [NgClass]
+    templateUrl: './app/location.component.html'
 })
 export class LocationComponent implements OnInit {
 
