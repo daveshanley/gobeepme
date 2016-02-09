@@ -91,22 +91,18 @@ input[type="password"] {
     background-color: red;
 }
 
-
-
 device-item {
-    border-top: 1px solid #e5e5e5;
-    padding-top: 10px;
-    padding-bottom: 10px;
     width: 100%;
-    display: block;
 }
-device-item:hover {
+
+.card-block:hover {
     background-color: rgba(243, 245, 246, 0.47);
     cursor:pointer;
 }
-device-item:active {
+.card-block:active {
     background-color: rgba(216, 218, 219, 0.47);
 }
+
 location {
     width: 100%;
     height: 100px;
@@ -115,10 +111,12 @@ location {
 
 message-input {
     position: absolute;
-    width: 500px;
-    //top: -26px;
     top: -1.3rem;
     left: 20rem;
+    opacity:0;
+    animation: fadeInMessage 300ms 1.5s ease-out;
+    animation-fill-mode: forwards;
+    text-align: left;
 
 }
 
@@ -135,6 +133,10 @@ message-input input[type="text"] { // overriding for now
     color: #818a91;
     border: 1px solid #ccc;
     margin-top:0.5rem;
+
+
+
+
 }
 
 @keyframes shrinkHeader {
@@ -143,11 +145,14 @@ message-input input[type="text"] { // overriding for now
 
 .header-container {
     position:relative;
+    text-align:center;
 }
 
 .smallerHeader {
-    animation: shrinkHeader 400ms 500ms ease-out;
-    animation-fill-mode: forwards
+    height: 100px;
+    transition: height 400ms 500ms ease-out;
+    //animation: shrinkHeader 400ms 500ms ease-out;
+    //animation-fill-mode: forwards
 }
 
 .smallerBell {
@@ -155,6 +160,8 @@ message-input input[type="text"] { // overriding for now
         ringBell 1s 1.2s ease-out;
     animation-fill-mode: forwards
 }
+
+
 
 @keyframes fadeOutBell {
     from { opacity: 1}
@@ -196,13 +203,17 @@ message-input input[type="text"] { // overriding for now
     }
 }
 
+@keyframes fadeInMessage {
+    to { opacity: 1}
+}
+
+
 .ringBell {
     -webkit-transform-origin: top center;
     transform-origin: top center;
     -webkit-animation-name: ringBell;
     animation-name: ringBell;
 }
-
 
 
 
@@ -379,11 +390,44 @@ message-input input[type="text"] { // overriding for now
 }
 
 
+@keyframes showCardDeck {
+    to { opacity: 1}
+}
 
 
+
+@keyframes refreshSpin {
+
+
+    0% {
+        -webkit-transform: rotate3d(0, 0, 1,0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+
+
+
+    100% {
+        -webkit-transform: rotate3d(0, 0, 1, 360deg);
+        transform: rotate3d(0, 0, 1, 360deg);
+    }
+
+
+}
 
 .card-deck {
     margin: 0 -1.25rem;
+}
+
+
+.refresh-icon {
+    font-size: 5rem;
+    color: rgba(92, 184, 92, 0.47);
+    animation: refreshSpin 1s linear infinite;
+    animation-fill-mode: forwards
+}
+
+.refresh-container {
+    text-align:center;
 }
 
 .card-deck .card {
@@ -396,3 +440,205 @@ message-input input[type="text"] { // overriding for now
 
 
 
+
+@keyframes beepHeader {
+    from { background-color: #F0AD4E; }
+    to {  background-color: rgba(236, 238, 239, 0.33);}
+}
+
+
+@keyframes beepTitle {
+    from { color: white; }
+    to { color: #F0AD4E; }
+}
+
+@keyframes beepLabel {
+    from { color: white; }
+    to { color: #B9B9B9; }
+}
+
+
+@keyframes pulseBell {
+    from {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+
+    10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    }
+
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+
+    to {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+
+.beepingHeader {
+    animation: beepHeader 1s linear;
+    animation-fill-mode: forwards;
+}
+
+.beepingHeader h1 strong {
+    animation: beepTitle 1s linear;
+    animation-fill-mode: forwards;
+}
+
+.beepingHeader span.messagelabel {
+    animation: beepLabel 1s linear;
+    animation-fill-mode: forwards;
+}
+
+.beepingOverlay {
+
+
+}
+
+.bigBell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -100px;
+    background-color: #f1c40f;
+    text-align: center;
+
+    /* needed styles for the overlay */
+    z-index: 13; /* keep on top of other elements on the page */
+    box-shadow: 0 0 0 9999px rgba(100,100,100,0.1);
+
+
+    width: 17rem;
+    height: 18rem;
+
+
+
+    border: 7px solid black;
+    border-radius: 13px;
+    font-size: 15rem;
+    line-height: 9rem;
+    padding-top: 1rem;
+    color: black;
+    /* -webkit-text-stroke: 3px #e1a700; */
+    background-color: rgba(237, 255, 0, 0.41);
+    opacity:1;
+}
+
+
+
+
+.bigBrokeBell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -100px;
+    background-color: #ff2d4b;
+    text-align: center;
+    z-index: 13;
+    box-shadow: 0 0 0 9999px rgba(100,100,100,0.1);
+    width: 17rem;
+    height: 18rem;
+    border: 7px solid #920300;
+    border-radius: 13px;
+    font-size: 15rem;
+    line-height: 9rem;
+    padding-top: 1rem;
+    color: #920300;
+    /* -webkit-text-stroke: 3px #e1a700; */
+    background-color: rgba(255, 79, 84, 0.41);
+    opacity: 1;
+}
+
+@keyframes fadeBeep {
+    from { opacity: 1; }
+    to {  opacity:0}
+}
+
+.bigBell.active {
+    animation: fadeBeep 200ms 1s linear;
+    animation-fill-mode: forwards;
+}
+
+.bigBrokeBell.active {
+    animation: fadeBeep 200ms 2.8s linear;
+    animation-fill-mode: forwards;
+}
+
+.bigBell i, .bigBrokeBell i {
+    animation: pulseBell 500ms 500ms ease-in-out 1
+}
+
+.beepfail {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: -1rem;
+}
+
+
+@keyframes showThrottle {
+    from { right: -19rem; }
+    to { right: 0; }
+}
+
+@keyframes closeThrottle {
+    from { right:0; }
+    to { right: -19rem; }
+}
+
+.throttle {
+    position: fixed;
+    top: 0;
+    background-color: rgba(236, 238, 239, 0.78);
+    width: 19rem;
+    height: 100px;
+    border-bottom: 1px solid #ddd;
+    color: #C7C7C7;
+    padding-top: 1rem;
+    padding-left: 1rem;
+
+}
+
+.throttle.closed {
+    right: 0;
+    animation: closeThrottle 200ms ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+
+.throttle.opened {
+    right: -19rem;
+    animation: showThrottle 200ms ease-in;
+    animation-fill-mode: forwards;
+
+}
+
+
+.throttle i {
+    position:absolute;
+    font-size: 4rem;
+
+}
+
+.throttle p {
+    margin-left: 4.5rem;
+    margin-top: -6px;
+    color: #A2A2A2;
+}
+
+body {
+    position:relative;
+}

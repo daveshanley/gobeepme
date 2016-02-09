@@ -1,11 +1,28 @@
-<app-header [shrunk]="true" (messageEvent)="messageChanged($event)"></app-header>
+<div class="bigBrokeBell active" [hidden]="!beepingError" >
+    <i class="fa fa-thumbs-down"></i>
+    <p class="beepfail">Beep Failed.</p>
+</div>
+<div class="bigBell active" [hidden]="!beeping" ><i class="fa fa-bell-o"></i></div>
+<div class="throttle" [hidden]="!throttled" [ngClass]="{opened:!throttleClose, closed:throttleClose}">
+    <i class="fa fa-hourglass-half"></i>
+    <p>
+        <strong>Hold on a moment</strong>.<br/>
+        We don't want to cause a flood.
+    </p>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row" [hidden]="!spinner">
+        <div class="col-md-12 refresh-container">
+            <i class="fa fa-refresh refresh-icon"></i>
+        </div>
+    </div>
+    <div class="row" [hidden]="spinner">
+        <div class="col-md-12">
             <div class="card-deck-wrapper">
                 <div class="card-deck">
-                    <div class="card" *ngFor="#device of devices">
-                        <device-item [device]="device" (click)="selectDevice(device)"></device-item>
+                    <div *ngFor="#device of devices;  #i = index" class="card">
+                        <device-item [device]="device"
+                                     (selectedDevice)="selectDevice($event)"></device-item>
                     </div>
                 </div>
             </div>

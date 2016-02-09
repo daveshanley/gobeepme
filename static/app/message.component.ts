@@ -7,7 +7,7 @@ import {Component, Output, OnInit, EventEmitter}       from "angular2/core";
 
 export class MessageComponent implements OnInit {
     message:string;
-    @Output()  messageUpdate:EventEmitter<String> = new EventEmitter();
+    @Output()  messageEvent:EventEmitter<String> = new EventEmitter();
 
     ngOnInit() {
         this.message = "Beep!";
@@ -15,7 +15,7 @@ export class MessageComponent implements OnInit {
     }
 
     messageChange() {
-        this.messageUpdate.emit(this.message);
+        this.messageEvent.emit(this.message);
 
     }
 }

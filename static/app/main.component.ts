@@ -1,4 +1,4 @@
-import {Component}                      from 'angular2/core';
+import {Component, OnInit}              from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AuthComponent}                  from './auth.component'
 import {Device}                         from './model/device.model'
@@ -7,34 +7,58 @@ import {DataService}                    from "./services/data.service";
 import {ModelService}                   from "./services/model.service";
 import {Creds}                          from "./model/creds.model";
 import {Router}                         from "angular2/router";
+import {AuthEventService}               from "./services/auth.service";
+import {SpinnerComponent}               from "./utils/spinner.component";
+import {HeaderComponent}                from "./utils/header.component";
+import {BeepEventService}               from "./services/beepevent.service";
+import {ServiceResponse, BeepCommand}   from "./model/beepcommand.model";
 
 @Component({
     selector: 'gobeepme',
     templateUrl: './app/main.component.html',
-    providers: [DataService, ModelService],
-    directives: [DeviceListComponent,AuthComponent, ROUTER_DIRECTIVES]
+    providers: [ModelService],
+    directives: [DeviceListComponent, AuthComponent, HeaderComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
     {path:'/',      name: 'Authenticate',    component: AuthComponent, useAsDefault:true},
     {path:'/list',  name: 'ListDevices',     component: DeviceListComponent}
 
 ])
+export class MainComponent implements OnInit{
 
-export class MainComponent {
-    modelService:ModelService;
+    message:string;
 
-    constructor(modelService: ModelService, private _creds: Creds, private _router: Router) {
-        this.modelService = modelService;
+    constructor(private _modelService: ModelService,
+                private _creds: Creds,
+                private _beepService: BeepEventService) {
     }
 
-    authenticatedEvent() {
-        console.log('AUTHENTICATED');
-        this._router.navigate( ["ListDevices", {}] );
-
+    ngOnInit() {
+        this._beepService.subscribe(r => this.beepRequested(r));
     }
 
-    deviceSelected(item) {
-        console.log('selected', item)
+    messageChanged(msg) {
+        this.message = msg;
     }
 
+    beepSuccess(r) {
+        this._beepService.beepEventResult(true);
+    }
+
+    beepFail(r) {
+        this._beepService.beepEventResult(false);
+    }
+
+    beepRequested(device) {
+        if(device != null) {
+
+            var bc:BeepCommand =
+                this._beepService.generateBeepCommand(this._creds, device, this.message);
+
+            this._modelService.beep(
+                bc,
+                (r:ServiceResponse) => this.beepSuccess(r),
+                (r:ServiceResponse) => this.beepFail(r));
+        }
+    }
 }

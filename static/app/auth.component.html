@@ -1,7 +1,7 @@
-<app-header></app-header>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6 col-md-offset-3">
             <div [hidden]="authenticating||authenticated">
                 <div [ngClass]="{fadeOut:fadeOut, animated:true, alert:true, 'alert-danger':true}" role="alert"
                      [hidden]="!error">

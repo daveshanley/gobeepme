@@ -1,4 +1,4 @@
-<section class="jumbotron" [ngClass]="{smallerHeader:shrunk}">
+<section class="jumbotron" [ngClass]="{smallerHeader:shrunk, beepingHeader:beeping}">
     <div class="container header-container">
         <h1 class="beepbell" [ngClass]="{smallerBell:shrunk}">
             <i class="fa fa-bell-o"></i>
@@ -9,6 +9,9 @@
         <p class="lead text-muted" [ngClass]="{hideStrap:shrunk}">
             Tired of losing your iOS device?
         </p>
-        <message-input (messageUpdate)="messageChanged($event)"></message-input>
+        <div [hidden]="!shrunk">
+            <!--<message-input (messageUpdate)="messageChanged($event)"></message-input>-->
+            <message-input (messageEvent)="messageChanged($event)"></message-input>
+        </div>
     </div>
 </section>

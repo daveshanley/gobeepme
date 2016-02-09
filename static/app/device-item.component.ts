@@ -1,8 +1,8 @@
-import {Component, Input}       from "angular2/core";
-import {NgClass}                from "angular2/common";
-import {Device}                 from "./model/device.model";
-import {BatteryComponent}       from "./battery.component";
-import {LocationComponent}      from "./location.component";
+import {Component, Input,
+            Output, EventEmitter}       from "angular2/core";
+import {Device}                         from "./model/device.model";
+import {BatteryComponent}               from "./battery.component";
+import {LocationComponent}              from "./location.component";
 
 @Component({
     selector:       "device-item",
@@ -11,5 +11,11 @@ import {LocationComponent}      from "./location.component";
 })
 
 export class DeviceItemComponent  {
+
     @Input() device: Device;
+    @Output() selectedDevice:EventEmitter<Device> = new EventEmitter();
+
+    selectDevice(device) {
+        this.selectedDevice.emit(device);
+    }
 }
