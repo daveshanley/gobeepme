@@ -1,3 +1,8 @@
+// Copyright 2016 Dave Shanley <dave@quobix.com>
+// Use of this source code is governed by a The MIT License
+// license that can be found in the LICENSE file.
+
+// package main handles instantiation of the console or service. Kicks it all off.
 package main
 
 import (
@@ -10,21 +15,19 @@ import (
     "github.com/daveshanley/gobeepme/service"
 )
 
-func Dummy() {
-
-}
+// main can either accept every arg as a flag, or you can step through in
+// an interactive manner.
 
 func main() {
-
-    // configure console flags
-    uf := flag.String("user", "", "Your iCloud ID / AppleID (normally an email)")
-    pf := flag.String("pass", "", "Pretty sure this is self explanatory")
-    nf := flag.String("name", "", "Name of the iOS device you want to beep")
-    mf := flag.String("msg", model.DefaultMessage, "Message to be sent to iOS device")
-    sf := flag.Bool("service", false, "Run as https service")
-    portf := flag.Int("port", 9443, "(service only) Port to run https service on")
-    certf := flag.String("key", "", "(service only) private server key")
-    keyf := flag.String("cert", "", "(service only) certificate to use")
+    // console flags
+    uf := flag.String("user", "", model.FlagAppleID)
+    pf := flag.String("pass", "", model.FlagApplePass)
+    nf := flag.String("name", "", model.FlagDeviceName)
+    mf := flag.String("msg", model.DefaultMessage, model.FlagDeviceMessage)
+    sf := flag.Bool("service", false, model.FlagRunService)
+    portf := flag.Int("port", 9443, model.FlagServicePort)
+    certf := flag.String("key", "", model.FlagServiceKey)
+    keyf := flag.String("cert", "", model.FlagServiceCert)
 
     var un, pw, dn, msg string
     flag.Parse()
@@ -44,7 +47,7 @@ func main() {
     }
 
     // print welcome!
-    console.WelcomeBanner()
+    console.PrintWelcomeBanner()
 
     // defaults
     if ufVal == "" {
@@ -75,7 +78,7 @@ func main() {
 
     d, err := commands.RefreshDeviceList(&cs)
     if err != nil {
-        fmt.Printf("\nCan't refresh devices: %v", err)
+        fmt.Printf("\n" + model.DeviceRefreshFailed, err)
         return
     }
 
@@ -99,3 +102,8 @@ func main() {
     console.PrintPlayingSound(dv.Name, msg)
     commands.PlaySound(&cs, dv, msg)
 }
+
+func Dummy() {
+
+}
+

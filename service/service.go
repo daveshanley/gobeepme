@@ -1,6 +1,12 @@
+// Copyright 2016 Dave Shanley <dave@quobix.com>
+// Use of this source code is governed by a The MIT License
+// license that can be found in the LICENSE file.
+
+// service package handles all web service calls and provides a simple RESTful API for the bundled UI.
 package service
 
 import (
+    "os"
     "net/http"
     "log"
     "encoding/json"
@@ -113,15 +119,25 @@ func BeepDevice(w http.ResponseWriter, req *http.Request) {
 }
 
 func StartService(port int, key, cert string) {
+    if key == "" || cert =="" {
+        console.PrintKeyCertError()
+        return
+    }
+    if(port < 1024) {
+        console.PrintPortInvalidError(port);
+    }
+    if _, err := os.Stat(key); os.IsNotExist(err) {
+        console.PrintKeyNotFoundError(key)
+        return
+    }
+    if _, err := os.Stat(cert); os.IsNotExist(err) {
+        console.PrintCertNotFoundError(cert)
+        return
+    }
 
-   // if key == "" || cert =="" {
-   //     console.PrintKeyCertError()
-   //     return
-   // }
     console.PrintServiceMode()
     router := NewRouter()
-    //log.Fatal(http.ListenAndServeTLS(":9443", cert, key, router))
-    log.Fatal(http.ListenAndServeTLS(":9443", "fullchain.pem", "privatekey.pem", router))
+    log.Fatal(http.ListenAndServeTLS(":" + string(port), cert, key, router))
 }
 
 func Dummy() {

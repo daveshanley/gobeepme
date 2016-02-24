@@ -1,4 +1,4 @@
-// Copyright 2015 Dave Shanley <dave@quobix.com>
+// Copyright 2016 Dave Shanley <dave@quobix.com>
 // Use of this source code is governed by a The MIT License
 // license that can be found in the LICENSE file.
 
@@ -65,12 +65,30 @@ const (
     NoCredentials       string = "No authentication credentials were submitted"
     CommandMalformed    string = "Server command malformed"
     CommandMissingAttr  string = "Server command missing authentication, or iOS device name"
-    NoDeviceName        string = "No device with name [%s] located"
-    NoDeviceIndex       string = "No device with index [%d] located"
-    NoDeviceID          string = "No device with id [%s] located"
+    NoDeviceName        string = "Can't Beep! No device with name [%s] located"
+    NoDeviceIndex       string = "Can't Beep! No device with index [%d] located"
+    NoDeviceID          string = "Can't Beep! No device with id [%s] located"
     DefaultMessage      string = "Beep Beep!"
     PlayingSound        string = "Playing sound on iOS Device [%s] with message: '%s'"
     StartingService     string = "Starting beepme as a service."
+    ProvideCertificates string = "Please supply a port, private key and certficiate when starting service"
+    KeyNotFoundError    string = "Unable to load key file '%s'"
+    CertNotFoundError   string = "Unable to load cert file '%s'"
+    PortInvalidError    string = "Port invalid [%s], must be higer than 1024"
+    DeviceRefreshFailed string = "Can't refresh devices: %v"
+    FlagAppleID         string = "Your iCloud ID / AppleID (normally an email)"
+    FlagApplePass       string = "Pretty sure this is self explanatory"
+    FlagDeviceName      string = "Name of the iOS device you want to beep"
+    FlagDeviceMessage   string = "Message to be sent to iOS device"
+    FlagRunService      string = "Run as https service"
+    FlagServicePort     string = "(service only) Port to run https service on"
+    FlagServiceCert     string = "(service only) certificate to use"
+    FlagServiceKey      string = "(service only) private server key"
+    PickTargetID        string = "Pick Target ID: "
+    ICloudPassword      string = "iCloud Password: "
+    ICloudUsername      string = "iCloud Username: "
+    BeepMessage         string = "Message: "
+    BeepHeader          string = "gobeepme - page your iOS device\n-----------------------------";
 )
 
 func (d *DeviceResult) GetDevice(id string) (*Device, error) {

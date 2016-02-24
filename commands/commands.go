@@ -1,4 +1,4 @@
-// Copyright 2015 Dave Shanley <dave@quobix.com>
+// Copyright 2016 Dave Shanley <dave@quobix.com>
 // Use of this source code is governed by a The MIT License
 // license that can be found in the LICENSE file.
 
@@ -33,8 +33,6 @@ var (
     }
     cookieJar, _ = cookiejar.New(nil)
 )
-
-
 
 func setOriginHeader(req *http.Request) {
     req.Header.Set("Origin",Referrer)
@@ -97,7 +95,7 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
     if resp.StatusCode == http.StatusForbidden ||
         resp.StatusCode == http.StatusUnauthorized {
         return model.CloudService{},
-        fmt.Errorf("your credentials were rejected, try again.")
+        fmt.Errorf("Your credentials were rejected, try again.")
     }
     return model.CloudService{resp.Header.Get(ServiceHost),
         resp.Header.Get(ServiceScope), c}, nil
@@ -105,7 +103,7 @@ func Authenticate(c model.Creds) (model.CloudService, error) {
 
 // Make a new request for our most recent devices
 func RefreshDeviceList(cs *model.CloudService) (model.DeviceResult, error) {
-    req := prepareRequest(InitCommand,cs, cs.Creds, bytes.NewReader([]byte("")))
+    req := prepareRequest(RefreshCommand,cs, cs.Creds, bytes.NewReader([]byte("")))
     resp,_ :=executeCommand(req)
     var dv model.DeviceResult
     if err := json.NewDecoder(resp.Body).Decode(&dv); err != nil {
