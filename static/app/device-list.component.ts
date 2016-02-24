@@ -44,6 +44,7 @@ export class DeviceListComponent implements OnInit, OnActivate {
     ngOnInit() {
         if(!this._creds.authenticated) {
             this._router.navigate( ["Authenticate", {}] );
+            return
         }
         this._authService.authenicatedEvent(true); // tell the header to shrink
         this._beepService.subscribe(null, r => this.beepResponse(r));
@@ -65,8 +66,6 @@ export class DeviceListComponent implements OnInit, OnActivate {
         this.beepCount++;
         this.beeping = true;
         setTimeout(() => this.beeping = false, 1200);
-
-
     }
 
     routerOnActivate() {
