@@ -8,6 +8,7 @@ all: clean build ui install
 
 build:
 	@echo "\n*** Building gobeepme ***\n"
+	go get ./...
 	go build -o ${BINARY} gobeepme.go
 
 .PHONY: install
