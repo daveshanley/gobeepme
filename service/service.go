@@ -54,6 +54,7 @@ func writeError(w http.ResponseWriter, msg string) {
     json.NewEncoder(w).Encode(model.ServiceResponse{true,msg})
 }
 
+// ListDevices returns a collection of JSON Device objects to the webservice.
 func ListDevices(w http.ResponseWriter, req *http.Request) {
     setHeaders(w)
     var cr model.Creds
@@ -78,6 +79,7 @@ func ListDevices(w http.ResponseWriter, req *http.Request) {
     }
 }
 
+// BeepDevice triggers a device beep
 func BeepDevice(w http.ResponseWriter, req *http.Request) {
     setHeaders(w)
     var sc model.ServiceCommand
@@ -89,7 +91,6 @@ func BeepDevice(w http.ResponseWriter, req *http.Request) {
 
         w.WriteHeader(http.StatusForbidden)
         json.NewEncoder(w).Encode(sc)
-        //writeError(w,model.CommandMissingAttr)
         return
     }
 
@@ -119,6 +120,7 @@ func BeepDevice(w http.ResponseWriter, req *http.Request) {
     return
 }
 
+// StartService starts the gobeepme webservice running.
 func StartService(port int, key, cert string) {
     if key == "" || cert =="" {
         console.PrintKeyCertError()
@@ -139,10 +141,6 @@ func StartService(port int, key, cert string) {
 
     console.PrintServiceMode(port)
     router := NewRouter()
-
-    router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("static"))))
-    http.Handle("/", router)
-
     log.Fatal(http.ListenAndServeTLS(":" + strconv.Itoa(port), cert, key, router))
 }
 
