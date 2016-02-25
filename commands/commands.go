@@ -12,9 +12,10 @@ import (
     "encoding/json"
     "bytes"
     "fmt"
-    //"io/ioutil"
 )
 
+// Constants defining service endpoints for iCloud services. These are un-documented and are subject to
+// change at any time.
 const (
     FPIServiceURL   string = "https://fmipmobile.icloud.com/fmipservice/device/"
     Referrer        string = "https://www.icloud.com"

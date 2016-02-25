@@ -128,8 +128,9 @@ func PrintPlayingSound(name, msg string) {
 
 // PrintServiecMoode prints out a message informing the user that the app
 // has started in a non interactive mode and is listening for web requests.
-func PrintServiceMode() {
-    fmt.Println(model.StartingService)
+func PrintServiceMode(d int) {
+    fmt.Printf(model.StartingService, d)
+    printBlankLine()
 }
 
 // PrintKeyCertError simply prints out a message informing the user that
@@ -159,6 +160,7 @@ func PrintCertNotFoundError(c string) {
 // that they need to use a port higher than 1024 - because of reasons.
 func PrintPortInvalidError(p int) {
     fmt.Printf(model.PortInvalidError, p)
+    printBlankLine()
 }
 
 func Dummy() {

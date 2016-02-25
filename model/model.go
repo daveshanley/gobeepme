@@ -10,22 +10,27 @@ import (
     "strings"
 )
 
+// Creds contains id/pass for iCloud service
 type Creds struct {
     AppleID         string `json:"apple_id"`
     Password        string `json:"password"`
 }
 
+// ServiceCommand webservice command, contains iOS device message and the device name.
+// Creds is an unnamed property for simplicity
 type ServiceCommand struct {
     Creds
     Message         string `json:"message"`
     Name            string `json:"name"`
 }
 
+// DeviceResult represents a status code and collection of Device objects
 type DeviceResult struct {
     StatusCode      string `json:"statusCode"`
     Devices         []Device `json:"content"`
 }
 
+// Device represents an iOS device, connected to the users account.
 type Device struct {
     ID               string `json:"id"`
     BatteryLevel     float64 `json:"batteryLevel`
@@ -38,27 +43,32 @@ type Device struct {
     Name             string `'json:"name"`
 }
 
+// DeviceLocation represents the lon/lat of an iOS device
 type DeviceLocation struct {
     Longitude       float64 `json:"longitude"`
     Latitude        float64 `json:"latitude"`
 }
 
+// ServerCommand represents the JSON message sent to iCloud
 type ServerCommand struct {
     DeviceID        string `json:"device"`
     Message         string `json:"subject"`
 }
 
+// CloudService represents the host endpoints returned from the nexus
 type CloudService struct {
     Host            string
     Scope           string
     Creds           Creds
 }
 
+// ServiceResponse represents a reponse sent by the gobeepme webservice
 type ServiceResponse struct {
     Error           bool `json:"error"`
     Message         string `json:"message"`
 }
 
+// Language constants
 const (
     AuthFailedMessage   string = "Authentication failed: %v"
     ListDevicesFailed   string = "Unable to list iOS devices: %v"
@@ -70,11 +80,11 @@ const (
     NoDeviceID          string = "Can't Beep! No device with id [%s] located"
     DefaultMessage      string = "Beep Beep!"
     PlayingSound        string = "Playing sound on iOS Device [%s] with message: '%s'"
-    StartingService     string = "Starting beepme as a service."
+    StartingService     string = "Starting beepme as a service on port %d"
     ProvideCertificates string = "Please supply a port, private key and certficiate when starting service"
     KeyNotFoundError    string = "Unable to load key file '%s'"
     CertNotFoundError   string = "Unable to load cert file '%s'"
-    PortInvalidError    string = "Port invalid [%s], must be higer than 1024"
+    PortInvalidError    string = "Port invalid [%d], must be higer than 1024"
     DeviceRefreshFailed string = "Can't refresh devices: %v"
     FlagAppleID         string = "Your iCloud ID / AppleID (normally an email)"
     FlagApplePass       string = "Pretty sure this is self explanatory"
@@ -91,6 +101,7 @@ const (
     BeepHeader          string = "gobeepme - page your iOS device\n-----------------------------";
 )
 
+// GetDevice returns a Device with the device ID of the supplied argument
 func (d *DeviceResult) GetDevice(id string) (*Device, error) {
     for _, r := range d.Devices {
         if r.ID == id {
@@ -100,6 +111,7 @@ func (d *DeviceResult) GetDevice(id string) (*Device, error) {
     return nil, fmt.Errorf(NoDeviceID, id)
 }
 
+// GetDeviceByIndex returns the Device found and the index (console use)
 func (d *DeviceResult) GetDeviceByIndex(index int) (*Device, error) {
     i := 0
     for _, d := range d.Devices {
@@ -111,6 +123,7 @@ func (d *DeviceResult) GetDeviceByIndex(index int) (*Device, error) {
     return nil, fmt.Errorf(NoDeviceIndex, index)
 }
 
+// GetDeviceByName returns a Device with the device name of the supplied argument
 func (d *DeviceResult) GetDeviceByName(name string) (*Device, error) {
     for _, d := range d.Devices {
         if strings.ToLower(d.Name) == strings.ToLower(name) {

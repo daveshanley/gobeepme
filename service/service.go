@@ -11,6 +11,7 @@ import (
     "log"
     "encoding/json"
     "fmt"
+    "strconv"
     "github.com/daveshanley/gobeepme/model"
     "github.com/daveshanley/gobeepme/commands"
     "github.com/daveshanley/gobeepme/console"
@@ -123,8 +124,9 @@ func StartService(port int, key, cert string) {
         console.PrintKeyCertError()
         return
     }
-    if(port < 1024) {
+    if(port <= 1024) {
         console.PrintPortInvalidError(port);
+        return;
     }
     if _, err := os.Stat(key); os.IsNotExist(err) {
         console.PrintKeyNotFoundError(key)
@@ -135,9 +137,9 @@ func StartService(port int, key, cert string) {
         return
     }
 
-    console.PrintServiceMode()
+    console.PrintServiceMode(port)
     router := NewRouter()
-    log.Fatal(http.ListenAndServeTLS(":" + string(port), cert, key, router))
+    log.Fatal(http.ListenAndServeTLS(":" + strconv.Itoa(port), cert, key, router))
 }
 
 func Dummy() {
