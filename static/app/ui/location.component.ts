@@ -1,16 +1,14 @@
-import {Component, Input}       from "angular2/core";
-import {OnInit} from "angular2/core";
+import {Component, Input, OnInit}       from "../../node_modules/angular2/core";
 
 @Component({
     selector: "location",
-    templateUrl: './app/location.component.html'
+    templateUrl: './app/ui/location.component.html'
 })
 export class LocationComponent implements OnInit {
 
     apiKey:string = "AIzaSyBSlQ9m3DiaaiJB1l1ceSMAPZ_ZMD0jcUw";
     smallUrl:string;
     largeUrl:string;
-
 
     @Input() lon: number;
     @Input() lat: number;
@@ -41,10 +39,3 @@ export class LocationComponent implements OnInit {
         this.buildLargeUrl();
     }
 }
-
-/*
-
-
-    https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=14&size=400x400&key=YOUR_API_KEY
-
-*/

@@ -8,7 +8,7 @@ package commands
 import (
     "github.com/daveshanley/gobeepme/model"
     "net/http"
-    "net/http/cookiejar"
+    //"net/http/cookiejar"
     "encoding/json"
     "bytes"
     "fmt"
@@ -26,13 +26,6 @@ const (
     RefreshCommand  string = "/refreshClient"
     SoundCommand    string = "/playSound"
     MessageCommand  string = "/sendMessage"
-)
-
-var (
-    cl = &http.Client{
-        Jar: cookieJar,
-    }
-    cookieJar, _ = cookiejar.New(nil)
 )
 
 func setOriginHeader(req *http.Request) {
@@ -58,6 +51,7 @@ func prepareRequest(cmd string, cs *model.CloudService, c model.Creds, d *bytes.
 }
 
 func executeCommand(req *http.Request) (*http.Response, error) {
+    cl := &http.Client{}
     resp, err := cl.Do(req)
     if err != nil {
         panic(err)

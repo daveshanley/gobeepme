@@ -1,5 +1,5 @@
 import {bootstrap}          from 'angular2/platform/browser'
-import {MainComponent}      from './main.component'
+import {MainComponent}      from './controllers/main.component.ts'
 import {ROUTER_PROVIDERS}   from 'angular2/router';
 import {HTTP_PROVIDERS}     from 'angular2/http';
 import {DataService}        from './services/data.service';

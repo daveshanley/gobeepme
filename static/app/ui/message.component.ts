@@ -1,8 +1,8 @@
-import {Component, Output, OnInit, EventEmitter}       from "angular2/core";
+import {Component, Output, OnInit, EventEmitter} from "../../node_modules/angular2/core";
 
 @Component({
     selector:       "message-input",
-    templateUrl:    './app/message.component.html',
+    templateUrl:    './app/ui/message.component.html',
 })
 
 export class MessageComponent implements OnInit {

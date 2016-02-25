@@ -1,17 +1,17 @@
-import {Input, Output, EventEmitter, Component, OnInit}     from "angular2/core";
-import {DataService}                                        from "./services/data.service";
-import {Creds}                                              from "./model/creds.model";
-import {Router}                                             from "angular2/router";
-import {ModelService}                                       from "./services/model.service";
-import {Device}                                             from "./model/device.model";
-import {OnActivate}                                         from "angular2/router";
-import {BatteryComponent}                                   from "./battery.component";
-import {LocationComponent}                                  from "./location.component";
-import {DeviceItemComponent}                                from "./device-item.component";
-import {MessageComponent}                                   from "./message.component";
-import {HeaderComponent}                                    from "./utils/header.component";
-import {AuthEventService}                                   from "./services/auth.service";
-import {BeepEventService}                                   from "./services/beepevent.service";
+import {Input, Output, EventEmitter, Component, OnInit}     from "../../node_modules/angular2/core.d";
+import {DataService}                                        from "./../services/data.service.ts";
+import {Creds}                                              from "./../model/creds.model.ts";
+import {Router}                                             from "../../node_modules/angular2/router.d";
+import {ModelService}                                       from "./../services/model.service.ts";
+import {Device}                                             from "./../model/device.model.ts";
+import {OnActivate}                                         from "../../node_modules/angular2/router.d";
+import {BatteryComponent}                                   from "./../ui/battery.component.ts";
+import {LocationComponent}                                  from "./../ui/location.component.ts";
+import {DeviceItemComponent}                                from "./../ui/device-item.component.ts";
+import {MessageComponent}                                   from "./../ui/message.component.ts";
+import {HeaderComponent}                                    from "./../utils/header.component.ts";
+import {AuthEventService}                                   from "./../services/auth.service.ts";
+import {BeepEventService}                                   from "./../services/beepevent.service.ts";
 
 @Component({
     templateUrl:    './app/device-list.component.html',

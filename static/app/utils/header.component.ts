@@ -1,6 +1,6 @@
 import {Component, Input, Output,
         EventEmitter, OnInit}                   from "angular2/core";
-import {MessageComponent}                       from "../message.component";
+import {MessageComponent}                       from "../ui/message.component.ts";
 import {AuthEventService}                       from "../services/auth.service";
 import {BeepEventService} from "../services/beepevent.service";
 

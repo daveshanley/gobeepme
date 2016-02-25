@@ -1,12 +1,12 @@
 import {Component, Input,
-            Output, EventEmitter}       from "angular2/core";
-import {Device}                         from "./model/device.model";
+            Output, EventEmitter}       from "../../node_modules/angular2/core";
+import {Device}                         from "./../model/device.model";
 import {BatteryComponent}               from "./battery.component";
 import {LocationComponent}              from "./location.component";
 
 @Component({
     selector:       "device-item",
-    templateUrl:    './app/device-item.component.html',
+    templateUrl:    './app/ui/device-item.component.html',
     directives:     [BatteryComponent, LocationComponent]
 })
 
