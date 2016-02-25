@@ -27,11 +27,28 @@ func NewRouter() *mux.Router {
     }
 
     // add static route for files
+
+
+    /*
     router.
         Methods("GET").
         Path("/").
         Name("Static").
-        Handler(http.FileServer(http.Dir("./static/")))
+        Handler(http.FileServer(http.Dir("./static")))
+
+
+
+    /*
+    router.Handle("/", IndexHandler).Methods("GET")
+
+  http.Handle("/", router)
+  http.ListenAndServe(":8000", nil)
+     */
+
+
+//myRouter.Handle('/images/{rest}', http.StripPrefix("/images/", http.FileServer(http.Dir(HomeFolder + "images/"))))
+    //2. myRouter.PathPrefix("/images/").Handler(http.StripPrefix("/images/", http.FileServer(http.Dir(HomeFolder + "images/"))))
+
 
     return router
 }

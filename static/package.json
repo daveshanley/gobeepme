@@ -1,11 +1,13 @@
 {
   "name": "gobeepme",
   "version": "0.0.1",
+  "description" : "gobeepme, ping your iOS device!",
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lite": "lite-server",
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "pop" : "npm run tsc"
   },
   "license": "ISC",
   "dependencies": {
@@ -23,6 +25,10 @@
   "devDependencies": {
     "concurrently": "^1.0.0",
     "lite-server": "^1.3.4",
-    "typescript": "^1.7.5"
+    "typescript": "1.7.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daveshanley/gobeepme"
   }
 }

@@ -139,6 +139,10 @@ func StartService(port int, key, cert string) {
 
     console.PrintServiceMode(port)
     router := NewRouter()
+
+    router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("static"))))
+    http.Handle("/", router)
+
     log.Fatal(http.ListenAndServeTLS(":" + strconv.Itoa(port), cert, key, router))
 }
 
