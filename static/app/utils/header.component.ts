@@ -1,8 +1,8 @@
 import {Component, Input, Output,
-        EventEmitter, OnInit}                   from "angular2/core";
-import {MessageComponent}                       from "../ui/message.component.ts";
-import {AuthEventService}                       from "../services/auth.service";
-import {BeepEventService} from "../services/beepevent.service";
+        EventEmitter, OnInit}       from "angular2/core";
+import {MessageComponent}           from "../ui/message.component";
+import {AuthEventService}           from "../services/auth.service";
+import {BeepEventService}           from "../services/beepevent.service";
 
 @Component({
     selector:       'app-header',

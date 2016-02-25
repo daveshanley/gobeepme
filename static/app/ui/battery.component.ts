@@ -1,5 +1,5 @@
-import {Component, Input}       from "../../node_modules/angular2/core";
-import {NgClass}                from "../../node_modules/angular2/common";
+import {Component, Input}       from "angular2/core";
+import {NgClass}                from "angular2/common";
 
 @Component({
     selector: "battery",

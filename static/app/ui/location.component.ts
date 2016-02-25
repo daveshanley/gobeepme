@@ -1,4 +1,4 @@
-import {Component, Input, OnInit}       from "../../node_modules/angular2/core";
+import {Component, Input, OnInit}       from "angular2/core";
 
 @Component({
     selector: "location",

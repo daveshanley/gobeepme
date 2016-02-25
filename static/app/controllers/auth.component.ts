@@ -1,11 +1,11 @@
-import {Input, Output, Host, Component}   from "../../node_modules/angular2/core";
-import {Creds}                                          from './../model/creds.model'
-import {DataService}                                    from './../services/data.service'
-import {ModelService}                                   from "./../services/model.service";
-import {Router, ROUTER_DIRECTIVES}                      from "../../node_modules/angular2/router";
-import {SpinnerComponent}                               from "./../utils/spinner.component";
-import {HeaderComponent}                                from "./../utils/header.component";
-import {AuthEventService}                                    from "./../services/auth.service";
+import {Input, Output, Host, Component}   from "angular2/core";
+import {Creds}                            from './../model/creds.model'
+import {DataService}                      from './../services/data.service'
+import {ModelService}                     from "./../services/model.service";
+import {Router, ROUTER_DIRECTIVES}        from "angular2/router";
+import {SpinnerComponent}                 from "./../utils/spinner.component";
+import {HeaderComponent}                  from "./../utils/header.component";
+import {AuthEventService}                 from "./../services/auth.service";
 
 @Component({
     templateUrl: './app/controllers/auth.component.html',

@@ -6,8 +6,6 @@ import {Creds}          from '../model/creds.model'
 import {BeepCommand}    from "../model/beepcommand.model";
 import                       'rxjs/add/operator/map';
 
-
-
 @Injectable()
 export class DataService {
 

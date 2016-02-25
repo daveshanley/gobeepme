@@ -1,4 +1,4 @@
-import {Component, Output, OnInit, EventEmitter} from "../../node_modules/angular2/core";
+import {Component, Output, OnInit, EventEmitter} from "angular2/core";
 
 @Component({
     selector:       "message-input",

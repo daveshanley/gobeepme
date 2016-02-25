@@ -1,5 +1,5 @@
 import {Component, Input,
-            Output, EventEmitter}       from "../../node_modules/angular2/core";
+            Output, EventEmitter}       from "angular2/core";
 import {Device}                         from "./../model/device.model";
 import {BatteryComponent}               from "./battery.component";
 import {LocationComponent}              from "./location.component";

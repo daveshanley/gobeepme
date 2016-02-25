@@ -1,20 +1,19 @@
-import {Input, Output, EventEmitter, Component, OnInit}     from "../../node_modules/angular2/core.d";
-import {DataService}                                        from "./../services/data.service.ts";
-import {Creds}                                              from "./../model/creds.model.ts";
-import {Router}                                             from "../../node_modules/angular2/router.d";
-import {ModelService}                                       from "./../services/model.service.ts";
-import {Device}                                             from "./../model/device.model.ts";
-import {OnActivate}                                         from "../../node_modules/angular2/router.d";
-import {BatteryComponent}                                   from "./../ui/battery.component.ts";
-import {LocationComponent}                                  from "./../ui/location.component.ts";
-import {DeviceItemComponent}                                from "./../ui/device-item.component.ts";
-import {MessageComponent}                                   from "./../ui/message.component.ts";
-import {HeaderComponent}                                    from "./../utils/header.component.ts";
-import {AuthEventService}                                   from "./../services/auth.service.ts";
-import {BeepEventService}                                   from "./../services/beepevent.service.ts";
+import {Input, Output, EventEmitter, Component, OnInit}     from "angular2/core";
+import {DataService}                                        from "./../services/data.service";
+import {Creds}                                              from "./../model/creds.model";
+import {Router, OnActivate}                                 from "angular2/router";
+import {ModelService}                                       from "./../services/model.service";
+import {Device}                                             from "./../model/device.model";
+import {BatteryComponent}                                   from "./../ui/battery.component";
+import {LocationComponent}                                  from "./../ui/location.component";
+import {DeviceItemComponent}                                from "./../ui/device-item.component";
+import {MessageComponent}                                   from "./../ui/message.component";
+import {HeaderComponent}                                    from "./../utils/header.component";
+import {AuthEventService}                                   from "./../services/auth.service";
+import {BeepEventService}                                   from "./../services/beepevent.service";
 
 @Component({
-    templateUrl:    './app/device-list.component.html',
+    templateUrl:    './app/controllers/device-list.component.html',
     providers:      [ModelService],
     directives:     [DeviceItemComponent, BatteryComponent,
                         LocationComponent, MessageComponent, HeaderComponent]
