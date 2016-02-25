@@ -15,7 +15,6 @@ header {
     height: 300px;
     border-bottom: 1px solid #E5E5E5;
 }
-
 .beepytitle {
     color: #9E9E9E;
 }
@@ -24,7 +23,6 @@ header {
     color: #F0AD4E;
 
 }
-
 
 .beepbell h1 {
     margin-bottom: 15px;
@@ -108,7 +106,6 @@ location {
     height: 100px;
 }
 
-
 message-input {
     position: absolute;
     top: -1.3rem;
@@ -117,7 +114,6 @@ message-input {
     animation: fadeInMessage 300ms 1.5s ease-out;
     animation-fill-mode: forwards;
     text-align: left;
-
 }
 
 .messagelabel {
@@ -133,10 +129,6 @@ message-input input[type="text"] { // overriding for now
     color: #818a91;
     border: 1px solid #ccc;
     margin-top:0.5rem;
-
-
-
-
 }
 
 @keyframes shrinkHeader {
@@ -151,8 +143,6 @@ message-input input[type="text"] { // overriding for now
 .smallerHeader {
     height: 100px;
     transition: height 400ms 500ms ease-out;
-    //animation: shrinkHeader 400ms 500ms ease-out;
-    //animation-fill-mode: forwards
 }
 
 .smallerBell {
@@ -160,8 +150,6 @@ message-input input[type="text"] { // overriding for now
         ringBell 1s 1.2s ease-out;
     animation-fill-mode: forwards
 }
-
-
 
 @keyframes fadeOutBell {
     from { opacity: 1}
@@ -207,15 +195,12 @@ message-input input[type="text"] { // overriding for now
     to { opacity: 1}
 }
 
-
 .ringBell {
     -webkit-transform-origin: top center;
     transform-origin: top center;
     -webkit-animation-name: ringBell;
     animation-name: ringBell;
 }
-
-
 
 @keyframes fadeInBell {
     from { opacity: 0}
@@ -227,7 +212,6 @@ message-input input[type="text"] { // overriding for now
     animation-fill-mode: forwards;
     left: 6rem;
 }
-
 
 .hideStrap {
     animation: fadeOutBell 200ms 300ms ease-out;
@@ -394,24 +378,15 @@ message-input input[type="text"] { // overriding for now
     to { opacity: 1}
 }
 
-
-
 @keyframes refreshSpin {
-
-
     0% {
         -webkit-transform: rotate3d(0, 0, 1,0deg);
         transform: rotate3d(0, 0, 1, 0deg);
     }
-
-
-
     100% {
         -webkit-transform: rotate3d(0, 0, 1, 360deg);
         transform: rotate3d(0, 0, 1, 360deg);
     }
-
-
 }
 
 .card-deck {
@@ -438,14 +413,10 @@ message-input input[type="text"] { // overriding for now
     margin-left: .75rem;
 }
 
-
-
-
 @keyframes beepHeader {
     from { background-color: #F0AD4E; }
     to {  background-color: rgba(236, 238, 239, 0.33);}
 }
-
 
 @keyframes beepTitle {
     from { color: white; }
@@ -456,7 +427,6 @@ message-input input[type="text"] { // overriding for now
     from { color: white; }
     to { color: #B9B9B9; }
 }
-
 
 @keyframes pulseBell {
     from {
@@ -501,10 +471,7 @@ message-input input[type="text"] { // overriding for now
     animation-fill-mode: forwards;
 }
 
-.beepingOverlay {
-
-
-}
+.beepingOverlay {   }
 
 .bigBell {
     position: absolute;
@@ -514,30 +481,19 @@ message-input input[type="text"] { // overriding for now
     margin-top: -100px;
     background-color: #f1c40f;
     text-align: center;
-
-    /* needed styles for the overlay */
     z-index: 13; /* keep on top of other elements on the page */
     box-shadow: 0 0 0 9999px rgba(100,100,100,0.1);
-
-
     width: 17rem;
     height: 18rem;
-
-
-
     border: 7px solid black;
     border-radius: 13px;
     font-size: 15rem;
     line-height: 9rem;
     padding-top: 1rem;
     color: black;
-    /* -webkit-text-stroke: 3px #e1a700; */
     background-color: rgba(237, 255, 0, 0.41);
     opacity:1;
 }
-
-
-
 
 .bigBrokeBell {
     position: absolute;
@@ -557,7 +513,6 @@ message-input input[type="text"] { // overriding for now
     line-height: 9rem;
     padding-top: 1rem;
     color: #920300;
-    /* -webkit-text-stroke: 3px #e1a700; */
     background-color: rgba(255, 79, 84, 0.41);
     opacity: 1;
 }
@@ -587,7 +542,6 @@ message-input input[type="text"] { // overriding for now
     margin-top: -1rem;
 }
 
-
 @keyframes showThrottle {
     from { right: -19rem; }
     to { right: 0; }
@@ -608,24 +562,19 @@ message-input input[type="text"] { // overriding for now
     color: #C7C7C7;
     padding-top: 1rem;
     padding-left: 1rem;
-
 }
 
 .throttle.closed {
     right: 0;
     animation: closeThrottle 200ms ease-out;
     animation-fill-mode: forwards;
-
 }
-
 
 .throttle.opened {
     right: -19rem;
     animation: showThrottle 200ms ease-in;
     animation-fill-mode: forwards;
-
 }
-
 
 .throttle i {
     position:absolute;
