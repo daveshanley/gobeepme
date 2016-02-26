@@ -1,8 +1,4 @@
-
-
 BINARY=gobeepme
-
-
 
 all: clean build ui install
 
