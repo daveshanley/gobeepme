@@ -18,7 +18,8 @@ beep. That would require some kind of hosted service, so I built this!
 
 * Runs as an interactive console application that you can step through.
 * Runs as an http service over TLS with very simple JSON API.
-* Service also provides a simple UI that uses with the API.
+
+The service also provides a simple UI that uses with the API.
 
 ## Building
 
@@ -79,3 +80,18 @@ You should then see a message stating:
 
 There is a simple html web UI that runs alongside the service if you'd like something more interactive than the console app. Simply open your
 browser to `https://localhost:9443` and you should see it appear. The UI is powered by Angular2 and it's written in TypeScript.
+
+# Connect gobeepme to your Amazon Echo (or other device)
+
+Pretty simple really. The Echo supports [IFTTT](https://ifttt.com/) (If This The That). You simply need to add the IFTTT channel to your Echo and use a simple recipe 
+to trigger an IFTTT Maker event when you speak a trigger word. To make this simple, I have created a *[gobeepme sample recipe](https://ifttt.com/recipes/378582-gobeepme-sample)*
+it's the same one that I also use daily. 
+
+The service request for a beep is dead simple.
+
+    {"apple_id": "your_id","password":"your_passwd", "name":"device_name","message":"Beep Beep!"}
+    
+The service endpoint is `/beep`, requires the data to be a POST and the content-type needs to be `application/json`
+
+
+

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a The MIT License
 // license that can be found in the LICENSE file.
 
-// package main handles instantiation of the console or service. Kicks it all off.
+// gobeepme is both a console app and webservice to allow you to ping your iOS device from anywhere.
 package main
 
 import (
@@ -17,7 +17,6 @@ import (
 
 // main can either accept every arg as a flag, or you can step through in
 // an interactive manner.
-
 func main() {
     // console flags
     uf := flag.String("user", "", model.FlagAppleID)
