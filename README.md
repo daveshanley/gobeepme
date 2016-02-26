@@ -1,6 +1,6 @@
 # gobeepme
 
-[![Build Status](https://api.travis-ci.org/daveshanley/gobeepme.svg)](https://travis-ci.org/daveshanley/gobeepme)
+[![Build Status](https://api.travis-ci.org/daveshanley/gobeepme.svg)](https://travis-ci.org/daveshanley/gobeepme) [![GoDoc](https://godoc.org/github.com/daveshanley/gobeepme?status.svg)](http://godoc.org/github.com/daveshanley/gobeepme)
 
 A simple console app/library/service to allow you to quickly ping and locate your iOS device.
 
@@ -81,7 +81,7 @@ You should then see a message stating:
 There is a simple html web UI that runs alongside the service if you'd like something more interactive than the console app. Simply open your
 browser to `https://localhost:9443` and you should see it appear. The UI is powered by Angular2 and it's written in TypeScript.
 
-# Connect gobeepme to your Amazon Echo (or other device)
+# Connect to your Amazon Echo
 
 Pretty simple really. The Echo supports [IFTTT](https://ifttt.com/) (If This The That). You simply need to add the IFTTT channel to your Echo and use a simple recipe 
 to trigger an IFTTT Maker event when you speak a trigger word. To make this simple, I have created a *[gobeepme sample recipe](https://ifttt.com/recipes/378582-gobeepme-sample)*
