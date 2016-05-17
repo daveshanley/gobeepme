@@ -1,10 +1,8 @@
-import {Input, Output, Host, Component}   from "angular2/core";
+import {Component}   from "angular2/core";
 import {Creds}                            from './../model/creds.model'
-import {DataService}                      from './../services/data.service'
 import {ModelService}                     from "./../services/model.service";
 import {Router, ROUTER_DIRECTIVES}        from "angular2/router";
 import {SpinnerComponent}                 from "./../utils/spinner.component";
-import {HeaderComponent}                  from "./../utils/header.component";
 import {AuthEventService}                 from "./../services/auth.service";
 
 @Component({
@@ -59,16 +57,16 @@ export class AuthComponent {
         var cake = () => {
             this._modelService.auth(this.model,
                 (r) => {
-                    this.result(r)
+                    this.result()
                 }, (r) => {
-                    this.authFailed(r)
+                    this.authFailed()
                 }
             );
         }
         setTimeout(cake, 1000);
     }
 
-    result(result) {
+    result() {
         this.authenticating = false;
         this.authenticated = true;
         this.model.authenticated=true;

@@ -17,12 +17,12 @@ export class DataService {
 
     auth (creds: Creds) {
         var cr = creds.toJSON()
-        return this.http.post('https://localhost:9443', JSON.stringify(cr))
+        return this.http.post('/', JSON.stringify(cr))
             .map(res => <Device[]> res.json())
     }
 
     beep (bc) {
-     return this.http.post('https://localhost:9443/beep', JSON.stringify(bc))
+     return this.http.post('/beep', JSON.stringify(bc))
           .map(res => res.json())
     }
 }

@@ -1,14 +1,9 @@
 import {Component, OnInit}              from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {Router}                         from "angular2/router";
 import {AuthComponent}                  from './auth.component'
-import {Device}                         from './../model/device.model'
 import {DeviceListComponent}            from "./device-list.component";
-import {DataService}                    from "./../services/data.service";
 import {ModelService}                   from "./../services/model.service";
 import {Creds}                          from "./../model/creds.model";
-import {AuthEventService}               from "./../services/auth.service";
-import {SpinnerComponent}               from "./../utils/spinner.component";
 import {HeaderComponent}                from "./../utils/header.component";
 import {BeepEventService}               from "./../services/beepevent.service";
 import {ServiceResponse, BeepCommand}   from "./../model/beepcommand.model";
@@ -41,11 +36,11 @@ export class MainComponent implements OnInit{
         this.message = msg;
     }
 
-    beepSuccess(r) {
+    beepSuccess() {
         this._beepService.beepEventResult(true);
     }
 
-    beepFail(r) {
+    beepFail() {
         this._beepService.beepEventResult(false);
     }
 
@@ -57,8 +52,8 @@ export class MainComponent implements OnInit{
 
             this._modelService.beep(
                 bc,
-                (r:ServiceResponse) => this.beepSuccess(r),
-                (r:ServiceResponse) => this.beepFail(r));
+                (r:ServiceResponse) => this.beepSuccess(),
+                (r:ServiceResponse) => this.beepFail());
         }
     }
 }

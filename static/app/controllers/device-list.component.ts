@@ -1,5 +1,4 @@
-import {Input, Output, EventEmitter, Component, OnInit}     from "angular2/core";
-import {DataService}                                        from "./../services/data.service";
+import {Component, OnInit}                                  from "angular2/core";
 import {Creds}                                              from "./../model/creds.model";
 import {Router, OnActivate}                                 from "angular2/router";
 import {ModelService}                                       from "./../services/model.service";
