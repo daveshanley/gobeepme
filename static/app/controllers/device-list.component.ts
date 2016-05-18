@@ -85,8 +85,8 @@ export class DeviceListComponent implements OnInit, OnActivate {
 
     startThrottle() {
         this.throttled = true;
-        clearTimeout(this.beepThrottle)
-        clearTimeout(this.beepThrottleEnd)
+        clearTimeout(this.beepThrottle);
+        clearTimeout(this.beepThrottleEnd);
         this.beepThrottle = setTimeout(
             () => { this.throttleClose = false;
                     this.beepCount = 0;

@@ -54,16 +54,13 @@ export class AuthComponent {
     auth() {
         this.authenticating = true;
 
-        var cake = () => {
+        var processAuth = () => {
             this._modelService.auth(this.model,
-                (r) => {
-                    this.result()
-                }, (r) => {
-                    this.authFailed()
-                }
+                ()  => { this.result() },
+                (r) => { this.authFailed(r) }
             );
         }
-        setTimeout(cake, 1000);
+        setTimeout(processAuth, 1000);
     }
 
     result() {
