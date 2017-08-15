@@ -17,9 +17,10 @@ import (
 // Constants defining service endpoints for iCloud services. These are un-documented and are subject to
 // change at any time.
 const (
+
     FPIServiceURL   string = "https://fmipmobile.icloud.com/fmipservice/device/"
     Referrer        string = "https://www.icloud.com"
-    ServiceHost     string = "X-Apple-MMe-Host"
+    ServiceHost     string = "fmipmobile.icloud.com"
     ServiceScope    string = "X-Apple-MMe-Scope"
     ServiceEndpoint string = "/fmipservice/device/"
     InitCommand     string = "/initClient"
@@ -83,17 +84,18 @@ func SendMessage(cs *model.CloudService, d *model.Device, msg string) bool {
 
 // Authenticate user
 func Authenticate(c model.Creds) (model.CloudService, error) {
-    req, _ := http.NewRequest("POST", FPIServiceURL + c.AppleID + InitCommand, bytes.NewBufferString(""))
+    req, _ := http.NewRequest("POST", FPIServiceURL+c.AppleID+InitCommand, bytes.NewBufferString(""))
     setOriginHeader(req)
     setBasicAuth(req, c)
-    resp,_ :=executeCommand(req)
+    resp, _ := executeCommand(req)
     if resp.StatusCode == http.StatusForbidden ||
         resp.StatusCode == http.StatusUnauthorized {
         return model.CloudService{},
-        fmt.Errorf("Your credentials were rejected, try again.")
+            fmt.Errorf("Your credentials were rejected, try again.")
     }
-    return model.CloudService{resp.Header.Get(ServiceHost),
-        resp.Header.Get(ServiceScope), c}, nil
+
+    return model.CloudService{ServiceHost,
+                              resp.Header.Get(ServiceScope), c}, nil
 }
 
 // Make a new request for our most recent devices
