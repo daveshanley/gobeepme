@@ -81,6 +81,7 @@ func ListDevices(w http.ResponseWriter, req *http.Request) {
 
 // BeepDevice triggers a device beep
 func BeepDevice(w http.ResponseWriter, req *http.Request) {
+    fmt.Println("The Germans Are Coming!")
     setHeaders(w)
     var sc model.ServiceCommand
     if err := json.NewDecoder(req.Body).Decode(&sc); err != nil {
@@ -138,10 +139,10 @@ func StartService(port int, key, cert string) {
         console.PrintCertNotFoundError(cert)
         return
     }
-
-    console.PrintServiceMode(port)
+    fmt.Println("Jeepers Peepers")
+    //console.PrintServiceMode(port)
     router := NewRouter()
-    log.Fatal(http.ListenAndServeTLS(":" + strconv.Itoa(port), cert, key, router))
+    log.Fatal(http.ListenAndServe(":" + strconv.Itoa(port), router))
 }
 
 func Dummy() {
