@@ -4,10 +4,9 @@
 
 A simple console app/library/service to allow you to quickly ping and locate your iOS device.
 
-## Hosted Demo
+## Update (October 2021)
 
-Wanna check it out? You can try out the API or the UI [By clicking here](https://gobeepme.quobix.com:9443)
-
+This code is pretty old, the UI code is practically fossilized. It does still work however. 
 
 ## What exactly is it though?
 
@@ -28,7 +27,17 @@ The service also provides a simple UI that uses with the API.
 
 ## Building
 
-Simply clone the repo into your `$GOPATH` dir and run `make`. 
+Check out the code.
+
+```console
+git clone https://github.com/daveshanley/gobeepme.git
+```
+
+The project is now using go modules, so just type:
+
+```console
+go build gobeepme.go
+```
 
 ## Running gobeepme
 
@@ -60,9 +69,9 @@ a number of flags to avoid typing them in. The flags are:
 To run the service you will need an SSL cert/private key. If you don't have this already (most likely you don't) then you can 
 generate a self signed cert using openssl by issuing the following command. 
 
-~~~bash
+```bash
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem
-~~~
+```
 
 [Click here to read more on Stack Overflow](http://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl)
 
@@ -73,18 +82,15 @@ for one of these, or you can use [Let's Encrypt](https://letsencrypt.org/) for c
 
 Simply pass in the `-service` flag, your key and your cert location, and an optional port (defaults to 9443)
 
-~~~bash
+```bash
 ./gobeepme -service -cert=cert.pem -key=key.pem
-~~~
+```
 
 You should then see a message stating: 
 
-    Starting beepme as a service on port 9443
-
-### Using the UI
-
-There is a simple html web UI that runs alongside the service if you'd like something more interactive than the console app. Simply open your
-browser to `https://localhost:9443` and you should see it appear. The UI is powered by Angular2 and it's written in TypeScript.
+```bash
+Starting beepme as a service on port 9443
+```
 
 # Connect to your Amazon Echo
 
@@ -93,9 +99,9 @@ to trigger an IFTTT Maker event when you speak a trigger word. To make this simp
 it's the same one that I also use daily. 
 
 The service request for a beep is dead simple.
-
-    {"apple_id": "your_id","password":"your_passwd", "name":"device_name","message":"Beep Beep!"}
-    
+```json
+{"apple_id": "your_id","password":"your_passwd", "name":"device_name","message":"Beep Beep!"}
+``` 
 The service endpoint is `/beep`, requires the data to be a POST and the content-type needs to be `application/json`
 
 
