@@ -6,7 +6,8 @@ A simple console app/library/service to allow you to quickly ping and locate you
 
 ## Update (October 2021)
 
-This code is pretty old, the UI code is practically fossilized. It does still work however. 
+This code is pretty old, the UI code is practically fossilized. **It does still work however**. Apple has not changed
+the API, gobeepme will still beep you!
 
 ## What exactly is it though?
 
@@ -21,9 +22,10 @@ beep. That would require some kind of hosted service, so I built this!
 ### Well it runs in 2 different ways...
 
 * Runs as an interactive console application that you can step through.
-* Runs as an http service over TLS with very simple JSON API.
+* Runs as a http service over TLS with very simple JSON API.
 
-The service also provides a simple UI that uses with the API.
+~~The service also provides a simple UI that uses with the API.~~ Don't use the UI. Pretty sure it won't even run
+at this point. Just stick with the CLI or the service.
 
 ## Building
 
@@ -70,10 +72,8 @@ To run the service you will need an SSL cert/private key. If you don't have this
 generate a self signed cert using openssl by issuing the following command. 
 
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem
+openssl req  -nodes -new -x509  -keyout server.key -out server.cert
 ```
-
-[Click here to read more on Stack Overflow](http://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl)
 
 Or if you want to run gobeep me as a full stateless service in the cloud, then you will need an actual valid certificate. You can either pay
 for one of these, or you can use [Let's Encrypt](https://letsencrypt.org/) for completely free and valid certs (with a short lifetime).
@@ -83,13 +83,13 @@ for one of these, or you can use [Let's Encrypt](https://letsencrypt.org/) for c
 Simply pass in the `-service` flag, your key and your cert location, and an optional port (defaults to 9443)
 
 ```bash
-./gobeepme -service -cert=cert.pem -key=key.pem
+./gobeepme -service -port 8888 -key server.key -cert server.cert 
 ```
 
 You should then see a message stating: 
 
 ```bash
-Starting beepme as a service on port 9443
+Starting beepme as a service on port 8888
 ```
 
 # Connect to your Amazon Echo
