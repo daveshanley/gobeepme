@@ -24,8 +24,7 @@ beep. That would require some kind of hosted service, so I built this!
 * Runs as an interactive console application that you can step through.
 * Runs as a http service over TLS with very simple JSON API.
 
-~~The service also provides a simple UI that uses with the API.~~ Don't use the UI. Pretty sure it won't even run
-at this point. Just stick with the CLI or the service.
+There is a simple UI available if you run `make ui`. It's old, but it still works well.
 
 ## Building
 
@@ -40,6 +39,8 @@ The project is now using go modules, so just type:
 ```console
 go build gobeepme.go
 ```
+
+Then you should be able to run `./gobeepme`
 
 ## Running gobeepme
 
@@ -66,6 +67,16 @@ a number of flags to avoid typing them in. The flags are:
       -key string
             (service only) private server key
       
+### Building the UI
+
+The UI is using some old tech, when you build NPM will warn you about stuff, but it won't stop things from working. 
+
+```console
+make ui
+```
+
+NPM will kick in and will be done after a few seconds. The UI will be compiled and ready to serve by the service.
+
 ### Service experience
 
 To run the service you will need an SSL cert/private key. If you don't have this already (most likely you don't) then you can 
@@ -91,6 +102,9 @@ You should then see a message stating:
 ```bash
 Starting beepme as a service on port 8888
 ```
+
+You can then hit `https://localhost:8888` in your web browser (providing you built the UI) and see it in action.
+
 
 # Connect to your Amazon Echo
 

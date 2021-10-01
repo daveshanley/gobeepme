@@ -5,8 +5,7 @@ import {Component, Input, OnInit}       from "angular2/core";
     templateUrl: './app/ui/location.component.html'
 })
 export class LocationComponent implements OnInit {
-
-    apiKey:string = "AIzaSyBSlQ9m3DiaaiJB1l1ceSMAPZ_ZMD0jcUw";
+    apiKey:string = "AIzaSyAGPSx4mhkxAuh9lwAc_AiHdukNl2UF_g8\n";
     smallUrl:string;
     largeUrl:string;
 
@@ -26,7 +25,7 @@ export class LocationComponent implements OnInit {
 
     buildSmallUrl() {
         this.smallUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" +
-            this.lat + "," + this.lon + "&zoom=13&size="+ (this.width/3) + "x"+ (this.height/3)+ "&scale=1&"+this.buildMarker()+"&key=" + this.apiKey;
+            this.lat + "," + this.lon + "&size=600x300&zoom=13&size="+ (this.width/3) + "x"+ (this.height/3)+ "&scale=1&"+this.buildMarker()+"&key=" + this.apiKey;
     }
 
     buildLargeUrl() {
